@@ -1,0 +1,37 @@
+name: ServerCore
+version: 1.1
+description: Core commands & utils
+author: 8qBIT
+
+main: me.qbit.core.Main
+
+commands:
+   fly:
+      description: Enable or disable flights & change flight speed.
+      usage: /fly or /fly <speed 0.1 - 1>
+   gamemode:
+      description: Change your current gamemode.
+      aliases: [gm]
+      usage: /gamemode 0-3
+   tppos:
+      description: Teleport to coordinates.
+      usage: /tppos <x> <y> <z>
+   vanish:
+      description: Make yourself invisible from others.
+      usage: /vanish
+   rtp:
+      description: Random teleport.
+      usage: /rtp
+   feed:
+      description: Gives max food.
+      usage: /feed
+   heal:
+      description: Heals you.
+      usage: /heal
+   teleport:
+      description: Teleports you to the player.
+      aliases: [tp, goto]
+      usage: /teleport <name>
+   discord:
+      description: Gives you a discord link.
+      usage: /discord

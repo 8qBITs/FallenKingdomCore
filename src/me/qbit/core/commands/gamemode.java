@@ -24,7 +24,15 @@ public class gamemode implements CommandExecutor {
 				  p.setGameMode(GameMode.SURVIVAL);
 				  m.title(p, "&eGamemode set to SURVIVAL");
 			    break;
+			  case "survival":
+				  p.setGameMode(GameMode.SURVIVAL);
+				  m.title(p, "&eGamemode set to SURVIVAL");
+				  break;
 			  case "1":
+				  p.setGameMode(GameMode.CREATIVE);
+				  m.title(p, "&eGamemode set to CREATIVE");
+			    break;
+			  case "creative":
 				  p.setGameMode(GameMode.CREATIVE);
 				  m.title(p, "&eGamemode set to CREATIVE");
 			    break;
@@ -32,7 +40,15 @@ public class gamemode implements CommandExecutor {
 				  p.setGameMode(GameMode.ADVENTURE);
 				  m.title(p, "&eGamemode set to ADVENTURE");
 			    break;
+			  case "adventure":
+				  p.setGameMode(GameMode.ADVENTURE);
+				  m.title(p, "&eGamemode set to ADVENTURE");
+			    break;
 			  case "3":
+				  p.setGameMode(GameMode.SPECTATOR);
+				  m.title(p, "&eGamemode set to SPECTATOR");
+			    break;
+			  case "spectator":
 				  p.setGameMode(GameMode.SPECTATOR);
 				  m.title(p, "&eGamemode set to SPECTATOR");
 			    break;

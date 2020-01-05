@@ -3,6 +3,7 @@ package me.qbit.core.commands;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,13 +27,22 @@ public class rtp implements CommandExecutor {
 		
 		int x = rand.nextInt(5000);
 		int z = rand.nextInt(5000);
+		int y = 150;
 		
-		Location loc = new Location(p.getWorld(), x, 150,z);
-		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 4));
+		for(int i=255;i>1;i--) {
+			if(new Location(p.getWorld(),x,i,z).getBlock().getType()!=Material.AIR) {
+				y=i+2;
+				break;
+			}
+		}
+		
+		Location loc = new Location(p.getWorld(), x, y, z);
+		if(y==150)
+			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 4));
 		p.teleport(loc);
 		
 		m.sendnull(p);
-		m.title(p, "Teleporting to: " + x + " 150 " + z);
+		m.title(p, String.format("Teleporting to: %d %d %d", x,y,z)); 
 		
 		return true;
 	}

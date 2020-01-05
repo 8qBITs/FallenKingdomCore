@@ -19,4 +19,24 @@ public class util {
 		return false;
 	}
 	
+	public int getMaxHomes(Player p) {
+		if(isPlayerAdmin(p)) {
+			return 100;
+		}
+		
+		if(p.hasPermission("core.home3")) {
+			return 3;
+		}
+		
+		if(p.hasPermission("core.home7")) {
+			return 7;
+		}
+		
+		if(p.hasPermission("core.home15")) {
+			return 15;
+		}
+
+		return 1;
+	}
+	
 }

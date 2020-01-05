@@ -12,7 +12,7 @@ commands:
    gamemode:
       description: Change your current gamemode.
       aliases: [gm]
-      usage: /gamemode 0-3
+      usage: /gamemode <mode>
    tppos:
       description: Teleport to coordinates.
       usage: /tppos <x> <y> <z>

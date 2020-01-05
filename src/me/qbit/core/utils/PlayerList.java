@@ -389,6 +389,34 @@ public class PlayerList {
 			}
 		}
 	}
+	
+	/**
+	 * adds a specific player to the player's tablist.
+	 * 
+	 * @param player
+	 */
+	@SuppressWarnings("unchecked")
+	public void addPlayer(Player player) {
+		Object packet = ReflectionUtil
+				.instantiate((Constructor<?>) ReflectionUtil.getConstructor(PACKET_PLAYER_INFO_CLASS).get());
+		if (ReflectionUtil.getInstanceField(packet, "b") instanceof List) {
+			List<Object> players = (List<Object>) ReflectionUtil.getInstanceField(packet, "b");
+			Object gameProfile = GAMEPROFILECLASS.cast(ReflectionUtil.invokeMethod(player, "getProfile", new Class[0]));
+			Object[] array = (Object[]) ReflectionUtil.invokeMethod(CRAFT_CHAT_MESSAGE_CLASS, null, "fromString",
+					new Class[] { String.class }, player.getName());
+			Object data = ReflectionUtil.instantiate(PACKET_PLAYER_INFO_DATA_CONSTRUCTOR, packet, gameProfile, 1,
+					WORLD_GAME_MODE_NOT_SET, array[0]);
+			players.add(data);
+			sendNEWTabPackets(player, packet, players, PACKET_PLAYER_INFO_ACTION_ADD_PLAYER);
+		} else {
+			try {
+				sendOLDTabPackets(player, packet, player.getName(), false);
+			} catch (Exception e) {
+				error();
+				e.printStackTrace();
+			}
+		}
+	}
 
 	/**
 	 * Removes a custom tab from a player's tablist.

@@ -39,4 +39,22 @@ public class util {
 		return 1;
 	}
 	
+	public boolean getKeepXp(Player p) {
+		if(isPlayerAdmin(p)) {
+			return true;
+		} else if(p.hasPermission("core.keepxp")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean getKeepInventory(Player p) {
+		if(isPlayerAdmin(p)) {
+			return true;
+		} else if(p.hasPermission("core.keepinventory")) {
+			return true;
+		}
+		return false;
+	}
+	
 }

@@ -24,6 +24,7 @@ import me.qbit.core.commands.rtp;
 import me.qbit.core.commands.teleport;
 import me.qbit.core.commands.tppos;
 import me.qbit.core.commands.vanish;
+import me.qbit.core.events.playerDeath;
 import me.qbit.core.events.playerJoin;
 import me.qbit.core.utils.PlayerList;
 import me.qbit.core.utils.messenger;
@@ -55,9 +56,7 @@ public class Main extends JavaPlugin {
 		homesConfig = YamlConfiguration.loadConfiguration(homesConfigFile);
 		
 		registerCommands();
-		
-		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new playerJoin(), this);
+		registerEvents();
 		
         BukkitScheduler scheduler3 = getServer().getScheduler();
         scheduler3.scheduleSyncRepeatingTask(this, new Runnable() {
@@ -135,6 +134,12 @@ public class Main extends JavaPlugin {
 		getCommand("discord").setExecutor(new discord());
 		getCommand("home").setExecutor(new home());
 		getCommand("kickall").setExecutor(new kickall());
+	}
+	
+	private void registerEvents() {
+		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(new playerJoin(), this);
+		pm.registerEvents(new playerDeath(), this);
 	}
 	
 	public static Main getMain() {

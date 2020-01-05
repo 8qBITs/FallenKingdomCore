@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import me.qbit.core.Main;
 import me.qbit.core.utils.PlayerList;
 import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
@@ -19,6 +20,9 @@ public class playerJoin implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
+		for(Player vanished : Main.getVanished()) {
+			p.hidePlayer(vanished);
+		}
 		if(!p.hasPlayedBefore()) {
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lWelcome &f&l" + p.getDisplayName() + " &e&lhave fun playing!"));
 		}

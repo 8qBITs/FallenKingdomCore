@@ -14,11 +14,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import me.qbit.core.commands.discord;
+import me.qbit.core.commands.enderchest;
 import me.qbit.core.commands.feed;
 import me.qbit.core.commands.flight;
 import me.qbit.core.commands.gamemode;
 import me.qbit.core.commands.heal;
 import me.qbit.core.commands.home;
+import me.qbit.core.commands.invsee;
 import me.qbit.core.commands.kickall;
 import me.qbit.core.commands.rtp;
 import me.qbit.core.commands.teleport;
@@ -134,6 +136,8 @@ public class Main extends JavaPlugin {
 		getCommand("discord").setExecutor(new discord());
 		getCommand("home").setExecutor(new home());
 		getCommand("kickall").setExecutor(new kickall());
+		getCommand("enderchest").setExecutor(new enderchest());
+		getCommand("invsee").setExecutor(new invsee());
 	}
 	
 	private void registerEvents() {

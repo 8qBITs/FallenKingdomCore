@@ -41,3 +41,10 @@ commands:
    kickall:
       description: Kicks all players connected.
       usage: /kickall <reason>
+   enderchest:
+      description: Opens enderchest.
+      aliases: [ec]
+      usage: /enderchest
+   invsee:
+      description: Open player inventory.
+      usage: /invsee <player>

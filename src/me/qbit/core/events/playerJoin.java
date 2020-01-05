@@ -2,6 +2,8 @@ package me.qbit.core.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,7 +28,6 @@ public class playerJoin implements Listener {
 		if(!p.hasPlayedBefore()) {
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lWelcome &f&l" + p.getDisplayName() + " &e&lhave fun playing!"));
 		}
-		
 		m.sendnull(p);
 		m.message(p, "&lWARNING! &ePlease use external heaters on your own responsibility as they are known to bug and remove items from furnaces!");
 		m.sendnull(p);

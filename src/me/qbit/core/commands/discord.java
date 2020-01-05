@@ -17,7 +17,7 @@ public class discord implements CommandExecutor {
 		Player p = (Player) arg0;
 		
 		m.sendnull(p);
-		m.message(p, "&eJoin us here! &fhttps://discord.gg/Mvdg8F");
+		m.message(p, "&eJoin us here! &fhttps://discord.gg/zhrW4zC");
 		m.sendnull(p);
 		
 		return true;

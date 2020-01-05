@@ -1,11 +1,13 @@
 package me.qbit.core;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +18,7 @@ import me.qbit.core.commands.feed;
 import me.qbit.core.commands.flight;
 import me.qbit.core.commands.gamemode;
 import me.qbit.core.commands.heal;
+import me.qbit.core.commands.home;
 import me.qbit.core.commands.rtp;
 import me.qbit.core.commands.teleport;
 import me.qbit.core.commands.tppos;
@@ -30,10 +33,25 @@ public class Main extends JavaPlugin {
 	messenger m = new messenger();
 	util u = new util();
 	static List<Player> vanished_pl = new ArrayList<Player>();
+	static Main me;
+	File homesConfigFile;
+	YamlConfiguration homesConfig;
 	
 	
 	@Override
 	public void onEnable() {
+		
+		me = this;
+		getDataFolder().mkdir();
+		homesConfigFile = new File(getDataFolder(), "homes.yml");
+		if(!homesConfigFile.exists()) {
+			try {
+				homesConfigFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		homesConfig = YamlConfiguration.loadConfiguration(homesConfigFile);
 		
 		registerCommands();
 		
@@ -79,6 +97,27 @@ public class Main extends JavaPlugin {
 		return copy;
 	}
 	
+	public static YamlConfiguration GetHomeConfig() {
+		return Main.getMain().homesConfig;
+	}
+	
+	public static ConfigurationSection GetPlayerHomes(Player p) {
+		YamlConfiguration homes = Main.GetHomeConfig();
+		if(!homes.contains(p.getUniqueId().toString()) || !homes.isConfigurationSection(p.getUniqueId().toString())) {
+			homes.createSection(p.getUniqueId().toString());
+		}
+		return homes.getConfigurationSection(p.getUniqueId().toString());
+	}
+	
+	public static void SaveHomeConfig() {
+		Main main = Main.getMain();
+		try {
+			main.homesConfig.save(main.homesConfigFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static boolean IsVanished(Player pl) {
 		return pl!=null && vanished_pl.contains(pl);
 	}
@@ -93,10 +132,11 @@ public class Main extends JavaPlugin {
 		getCommand("heal").setExecutor(new heal());
 		getCommand("teleport").setExecutor(new teleport());
 		getCommand("discord").setExecutor(new discord());
+		getCommand("home").setExecutor(new home());
 	}
 	
-	public Main getMain() {
-		return this;
+	public static Main getMain() {
+		return me;
 	}
 	 	
 }

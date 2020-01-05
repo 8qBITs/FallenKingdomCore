@@ -35,3 +35,6 @@ commands:
    discord:
       description: Gives you a discord link.
       usage: /discord
+   home:
+      description: Teleports you to your home.
+      usage: /home <set|del|name>

@@ -38,3 +38,6 @@ commands:
    home:
       description: Teleports you to your home.
       usage: /home <set|del|name>
+   kickall:
+      description: Kicks all players connected.
+      usage: /kickall <reason>

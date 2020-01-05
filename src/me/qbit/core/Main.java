@@ -19,6 +19,7 @@ import me.qbit.core.commands.flight;
 import me.qbit.core.commands.gamemode;
 import me.qbit.core.commands.heal;
 import me.qbit.core.commands.home;
+import me.qbit.core.commands.kickall;
 import me.qbit.core.commands.rtp;
 import me.qbit.core.commands.teleport;
 import me.qbit.core.commands.tppos;
@@ -133,6 +134,7 @@ public class Main extends JavaPlugin {
 		getCommand("teleport").setExecutor(new teleport());
 		getCommand("discord").setExecutor(new discord());
 		getCommand("home").setExecutor(new home());
+		getCommand("kickall").setExecutor(new kickall());
 	}
 	
 	public static Main getMain() {

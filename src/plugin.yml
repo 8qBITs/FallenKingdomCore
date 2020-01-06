@@ -37,7 +37,16 @@ commands:
       usage: /discord
    home:
       description: Teleports you to your home.
-      usage: /home <set|del|name>
+      usage: /home <name>
+   sethome:
+      description: Sets a home.
+      usage: /sethome <name>
+   delhome:
+      description: Deletes a home.
+      usage: /delhome <name>
+   homes:
+      description: Lists your homes.
+      usage: /homes
    kickall:
       description: Kicks all players connected.
       usage: /kickall <reason>

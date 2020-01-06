@@ -30,7 +30,7 @@ import me.qbit.core.commands.rtp;
 import me.qbit.core.commands.teleport;
 import me.qbit.core.commands.tppos;
 import me.qbit.core.commands.vanish;
-import me.qbit.core.events.InventoryMoveItem;
+import me.qbit.core.events.inventoryMoveItem;
 import me.qbit.core.events.playerDeath;
 import me.qbit.core.events.playerJoin;
 import me.qbit.core.utils.PlayerList;
@@ -158,7 +158,7 @@ public class Main extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new playerJoin(), this);
 		pm.registerEvents(new playerDeath(), this);
-		pm.registerEvents(new InventoryMoveItem(), this);
+		pm.registerEvents(new inventoryMoveItem(), this);
 	}
 	
 	public void loadFromMysql() {

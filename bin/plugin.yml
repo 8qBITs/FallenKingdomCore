@@ -12,7 +12,7 @@ commands:
    gamemode:
       description: Change your current gamemode.
       aliases: [gm]
-      usage: /gamemode 0-3
+      usage: /gamemode <mode>
    tppos:
       description: Teleport to coordinates.
       usage: /tppos <x> <y> <z>
@@ -37,4 +37,14 @@ commands:
       usage: /discord
    home:
       description: Teleports you to your home.
-      usage: /home <set|del|name> [name]
+      usage: /home <set|del|name>
+   kickall:
+      description: Kicks all players connected.
+      usage: /kickall <reason>
+   enderchest:
+      description: Opens enderchest.
+      aliases: [ec]
+      usage: /enderchest
+   invsee:
+      description: Open player inventory.
+      usage: /invsee <player>

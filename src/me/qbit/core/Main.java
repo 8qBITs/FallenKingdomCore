@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -13,6 +14,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import me.qbit.core.ChunkLoader.ChunkHolder;
+import me.qbit.core.ChunkLoader.MysqlMethods;
+import me.qbit.core.ChunkLoader.ThreadKeepChunksLoaded;
 import me.qbit.core.commands.discord;
 import me.qbit.core.commands.enderchest;
 import me.qbit.core.commands.feed;
@@ -38,6 +42,8 @@ public class Main extends JavaPlugin {
 	messenger m = new messenger();
 	util u = new util();
 	static List<Player> vanished_pl = new ArrayList<Player>();
+	public ArrayList<ChunkHolder> myChunkHolders = new ArrayList<ChunkHolder>();
+	ThreadKeepChunksLoaded threadKeepChunksLoaded;
 	static Main me;
 	File homesConfigFile;
 	YamlConfiguration homesConfig;
@@ -154,6 +160,25 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new playerDeath(), this);
 		pm.registerEvents(new InventoryMoveItem(), this);
 	}
+	
+	public void loadFromMysql() {
+	    myChunkHolders = MysqlMethods.GetAllChunks();
+	  }
+	  
+	  public ChunkHolder isPartOfChunkLoaderCollection(Chunk chunk) {
+	    for (ChunkHolder chunkHolder : myChunkHolders) {
+	      if (chunkHolder.isSameChunk(chunk))
+	        return chunkHolder; 
+	    } 
+	    return null;
+	  }
+	
+	  public void reloadChunkDatabase() {
+		threadKeepChunksLoaded.run = false;
+	    loadFromMysql();
+	    this.threadKeepChunksLoaded = new ThreadKeepChunksLoaded();
+	    System.out.println("Database reloaded!");
+	  }
 	
 	public static Main getMain() {
 		return me;

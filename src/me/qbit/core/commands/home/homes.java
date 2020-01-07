@@ -19,7 +19,7 @@ public class homes implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		Player p = (Player) arg0;
-		ConfigurationSection sec = Main.GetPlayerHomes(p);
+		ConfigurationSection sec = u.getPlayerHomes(p);
 		if(sec.getKeys(false).size()>0) {
 			String home_str = "";
 			for(String h : sec.getKeys(false)) {

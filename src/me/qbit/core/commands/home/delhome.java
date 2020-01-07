@@ -18,7 +18,7 @@ public class delhome implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		Player p = (Player) arg0;
-		ConfigurationSection sec = Main.GetPlayerHomes(p);
+		ConfigurationSection sec = u.getPlayerHomes(p);
 		if(arg3.length == 0 || arg3[0].equalsIgnoreCase("home")) {
 			if(sec.contains("home")) {				
 				m.message(p, "&fDeleted home 'home'");

@@ -1,22 +1,66 @@
 package me.qbit.core.utils;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+
+import me.qbit.core.Main;
 
 public class util {
 	
 	messenger m = new messenger();
 	
 	public boolean isPlayerAdmin(Player p) {
-		
-		if(p instanceof Player) {
-			if(p.hasPermission("core.admin")) {
-				return true;
-			} else {
-				m.fullTitle(p, "&c&lWHOOPS!","&eSorry, but you are not allowed to use this command.");
-			}
+		if(!p.hasPermission("core.admin"))
+			m.fullTitle(p, "&c&lWHOOPS!","&eSorry, but you are not allowed to use this command.");
+		return p.hasPermission("core.admin");
+	}
+	
+	public void setBackLocation(Player p) {
+		YamlConfiguration backStorage = Main.GetBackStorage();
+		Location loc = p.getLocation();
+		String k = p.getUniqueId().toString();			
+		backStorage.set(k+".world",loc.getWorld().getName());
+		backStorage.set(k+".x",loc.getX());
+		backStorage.set(k+".y",loc.getY());
+		backStorage.set(k+".z",loc.getZ());
+		Main.SaveBackStorage();
+	}
+	
+	public void setBackLocation(Player p, Location loc) {
+		YamlConfiguration backStorage = Main.GetBackStorage();
+		String k = p.getUniqueId().toString();
+		if(loc==null) {
+			backStorage.set(k,null);
+		} else {			
+			backStorage.set(k+".world",loc.getWorld().getName());
+			backStorage.set(k+".x",loc.getX());
+			backStorage.set(k+".y",loc.getY());
+			backStorage.set(k+".z",loc.getZ());
 		}
-		
-		return false;
+		Main.SaveBackStorage();
+	}
+	
+	public boolean IsVanished(Player pl) {
+		return pl!=null && Main.getVanished().contains(pl);
+	}
+	
+	public Location getBackLocation(Player p) {
+		YamlConfiguration backStorage = Main.GetBackStorage();
+		String k = p.getUniqueId().toString();
+		if(!backStorage.contains(k))
+			return null;
+		return new Location(Bukkit.getWorld(backStorage.getString(k+".world")),backStorage.getInt(k+".x"),backStorage.getInt(k+".y"),backStorage.getInt(k+".z"));
+	}
+	
+	public ConfigurationSection getPlayerHomes(Player p) {
+		YamlConfiguration homes = Main.GetHomeStorage();
+		if(!homes.contains(p.getUniqueId().toString()) || !homes.isConfigurationSection(p.getUniqueId().toString())) {
+			homes.createSection(p.getUniqueId().toString());
+		}
+		return homes.getConfigurationSection(p.getUniqueId().toString());
 	}
 	
 	public int getMaxHomes(Player p) {
@@ -40,21 +84,11 @@ public class util {
 	}
 	
 	public boolean getKeepXp(Player p) {
-		if(isPlayerAdmin(p)) {
-			return true;
-		} else if(p.hasPermission("core.keepxp")) {
-			return true;
-		}
-		return false;
+		return isPlayerAdmin(p) || p.hasPermission("core.keepxp");
 	}
 	
 	public boolean getKeepInventory(Player p) {
-		if(isPlayerAdmin(p)) {
-			return true;
-		} else if(p.hasPermission("core.keepinventory")) {
-			return true;
-		}
-		return false;
+		return isPlayerAdmin(p) || p.hasPermission("core.keepinventory");
 	}
 	
 }

@@ -21,10 +21,11 @@ public class home implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		Player p = (Player) arg0;
-		ConfigurationSection sec = Main.GetPlayerHomes(p);
+		ConfigurationSection sec = u.getPlayerHomes(p);
 		if(arg3.length != 0) {
 			if(sec.contains(arg3[0])) {
 				m.message(p, String.format("&fTeleporting to home '%s'",arg3[0]));
+				u.setBackLocation(p);
 				p.teleport(new Location(Bukkit.getWorld(sec.getString(arg3[0]+".world")),sec.getInt(arg3[0]+".x"),sec.getInt(arg3[0]+".y"),sec.getInt(arg3[0]+".z")));
 			} else {
 				m.message(p, String.format("Home '%s' doesn't exist",arg3[0]));
@@ -32,6 +33,7 @@ public class home implements CommandExecutor {
 		} else {
 			if(sec.contains("home")) {
 				m.message(p, "&fTeleporting to home");
+				u.setBackLocation(p);
 				p.teleport(new Location(Bukkit.getWorld(sec.getString("home.world")),sec.getInt("home.x"),sec.getInt("home.y"),sec.getInt("home.z")));
 			} else {
 				m.message(p, "Home 'home' not set!");

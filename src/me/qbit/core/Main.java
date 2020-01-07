@@ -7,12 +7,12 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.yaml.snakeyaml.Yaml;
 
 import me.qbit.core.ChunkLoader.ChunkHolder;
 import me.qbit.core.ChunkLoader.MysqlMethods;
@@ -27,31 +27,41 @@ import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
 
 public class Main extends JavaPlugin {
-	
+	//TODO: all the commands in plugins.yml
 	messenger m = new messenger();
 	util u = new util();
 	static List<Player> vanished_pl = new ArrayList<Player>();
 	public ArrayList<ChunkHolder> myChunkHolders = new ArrayList<ChunkHolder>();
 	ThreadKeepChunksLoaded threadKeepChunksLoaded;
 	static Main me;
-	File homesConfigFile;
-	YamlConfiguration homesConfig;
-	
+	File mainConfigFile;
+	File homesStorageFile;
+	File backStorageFile;
+	YamlConfiguration mainConfig;
+	YamlConfiguration homesStorage;
+	YamlConfiguration backStorage;
 	
 	@Override
 	public void onEnable() {
 		
 		me = this;
 		getDataFolder().mkdir();
-		homesConfigFile = new File(getDataFolder(), "homes.yml");
-		if(!homesConfigFile.exists()) {
-			try {
-				homesConfigFile.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		mainConfigFile = new File(getDataFolder(), "config.yml");
+		homesStorageFile = new File(getDataFolder(), "homes.yml");
+		backStorageFile = new File(getDataFolder(), "backs.yml");
+		try {
+			if(!mainConfigFile.exists())
+				mainConfigFile.createNewFile();
+			if(!homesStorageFile.exists())
+				homesStorageFile.createNewFile();
+			if(!backStorageFile.exists())
+				backStorageFile.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		homesConfig = YamlConfiguration.loadConfiguration(homesConfigFile);
+		mainConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
+		homesStorage = YamlConfiguration.loadConfiguration(homesStorageFile);
+		backStorage = YamlConfiguration.loadConfiguration(backStorageFile);
 		
 		registerCommands();
 		registerEvents();
@@ -102,29 +112,43 @@ public class Main extends JavaPlugin {
 		return copy;
 	}
 	
-	public static YamlConfiguration GetHomeConfig() {
-		return Main.getMain().homesConfig;
+	public static YamlConfiguration GetMainConfig() {
+		return Main.getMain().mainConfig;
 	}
 	
-	public static ConfigurationSection GetPlayerHomes(Player p) {
-		YamlConfiguration homes = Main.GetHomeConfig();
-		if(!homes.contains(p.getUniqueId().toString()) || !homes.isConfigurationSection(p.getUniqueId().toString())) {
-			homes.createSection(p.getUniqueId().toString());
-		}
-		return homes.getConfigurationSection(p.getUniqueId().toString());
+	public static YamlConfiguration GetHomeStorage() {
+		return Main.getMain().homesStorage;
 	}
 	
-	public static void SaveHomeConfig() {
+	public static YamlConfiguration GetBackStorage() {
+		return Main.getMain().backStorage;
+	}
+	
+	public static void SaveMainConfig() {
 		Main main = Main.getMain();
 		try {
-			main.homesConfig.save(main.homesConfigFile);
+			main.mainConfig.save(main.mainConfigFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static boolean IsVanished(Player pl) {
-		return pl!=null && vanished_pl.contains(pl);
+	public static void SaveHomeConfig() {
+		Main main = Main.getMain();
+		try {
+			main.homesStorage.save(main.homesStorageFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void SaveBackStorage() {
+		Main main = Main.getMain();
+		try {
+			main.backStorage.save(main.backStorageFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void registerCommands() {
@@ -144,6 +168,7 @@ public class Main extends JavaPlugin {
 		getCommand("kickall").setExecutor(new kickall());
 		getCommand("enderchest").setExecutor(new enderchest());
 		getCommand("invsee").setExecutor(new invsee());
+		getCommand("back").setExecutor(new back());
 	}
 	
 	private void registerEvents() {

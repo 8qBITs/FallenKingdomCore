@@ -20,7 +20,7 @@ public class sethome implements CommandExecutor {
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		Player p = (Player) arg0;
 		int max_homes = u.getMaxHomes(p);
-		ConfigurationSection sec = Main.GetPlayerHomes(p);
+		ConfigurationSection sec = u.getPlayerHomes(p);
 		Location loc = p.getLocation();
 		if(sec.getKeys(false).size()>=max_homes) {
 			m.message(p, "You cannot set more homes");

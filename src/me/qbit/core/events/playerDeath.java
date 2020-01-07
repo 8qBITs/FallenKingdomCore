@@ -17,13 +17,13 @@ public class playerDeath implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent e) {
 		Player p = e.getEntity().getPlayer(); 
 		
-		if(u.getKeepXp(p)) {
-			e.setKeepLevel(true);
-		}
+		e.setKeepLevel(u.getKeepXp(p));
+		e.setKeepInventory(u.getKeepInventory(p));
 		
-		if(u.getKeepInventory(p)) {
-			e.setKeepInventory(true);
-		}
+		u.setBackLocation(p);
+		
+		if(u.IsVanished(p))
+			e.setDeathMessage(null);
 	}
 
 }

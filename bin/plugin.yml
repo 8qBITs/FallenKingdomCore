@@ -37,7 +37,16 @@ commands:
       usage: /discord
    home:
       description: Teleports you to your home.
-      usage: /home <set|del|name>
+      usage: /home <name>
+   sethome:
+      description: Sets a home.
+      usage: /sethome <name>
+   delhome:
+      description: Deletes a home.
+      usage: /delhome <name>
+   homes:
+      description: Lists your homes.
+      usage: /homes
    kickall:
       description: Kicks all players connected.
       usage: /kickall <reason>
@@ -48,3 +57,24 @@ commands:
    invsee:
       description: Open player inventory.
       usage: /invsee <player>
+   back:
+      description: Teleports you to your last location.
+      usage: /back
+   mute:
+      description: Mutes a player.
+      usage: /mute <player>
+   spawn:
+      description: Teleports you to the spawn.
+      usage: /spawn
+   tpa:
+      description: Requests teleportation to a player.
+      usage: /tpa <player>
+   tpahere:
+      description: Requests teleportation of a player to your location.
+      usage: /tpahere <player>
+   tpaccept:
+      description: Accepts teleportation request.
+      usage: /tpaccept
+   tpdeny:
+      description: Denies teleportation request.
+      usage: /tpdeny

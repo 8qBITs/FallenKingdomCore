@@ -23,6 +23,7 @@ public class teleport implements CommandExecutor {
 			try {
 			Player target = Bukkit.getPlayer(arg3[0]);
 			Location location = target.getLocation();
+			u.setBackLocation(p);
 			p.teleport(location);
 			m.title(p, "&eTeleported to: " + target.getName());
 			} catch(Exception e) {

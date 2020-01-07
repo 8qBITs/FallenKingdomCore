@@ -39,6 +39,7 @@ public class rtp implements CommandExecutor {
 		Location loc = new Location(p.getWorld(), x, y, z);
 		if(y==150)
 			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 4));
+		u.setBackLocation(p);
 		p.teleport(loc);
 		
 		m.sendnull(p);

@@ -63,6 +63,9 @@ commands:
    mute:
       description: Mutes a player.
       usage: /mute <player>
+   unmute:
+      description: Unmutes a player.
+      usage: /unmute <player>
    spawn:
       description: Teleports you to the spawn.
       usage: /spawn

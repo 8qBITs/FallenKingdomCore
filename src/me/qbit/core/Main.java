@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -19,10 +20,12 @@ import me.qbit.core.ChunkLoader.MysqlMethods;
 import me.qbit.core.ChunkLoader.ThreadKeepChunksLoaded;
 import me.qbit.core.commands.*;
 import me.qbit.core.commands.home.*;
+import me.qbit.core.commands.mute.*;
+import me.qbit.core.events.asyncPlayerChat;
 import me.qbit.core.events.inventoryMoveItem;
 import me.qbit.core.events.playerDeath;
 import me.qbit.core.events.playerJoin;
-import me.qbit.core.events.vehicleExitEvent;
+import me.qbit.core.events.vehicleExit;
 import me.qbit.core.utils.PlayerList;
 import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
@@ -38,9 +41,11 @@ public class Main extends JavaPlugin {
 	File mainConfigFile;
 	File homesStorageFile;
 	File backStorageFile;
+	File muteStorageFile;
 	YamlConfiguration mainConfig;
 	YamlConfiguration homesStorage;
 	YamlConfiguration backStorage;
+	YamlConfiguration muteStorage;
 	
 	@Override
 	public void onEnable() {
@@ -50,6 +55,7 @@ public class Main extends JavaPlugin {
 		mainConfigFile = new File(getDataFolder(), "config.yml");
 		homesStorageFile = new File(getDataFolder(), "homes.yml");
 		backStorageFile = new File(getDataFolder(), "backs.yml");
+		muteStorageFile = new File(getDataFolder(), "mutes.yml");
 		try {
 			if(!mainConfigFile.exists())
 				mainConfigFile.createNewFile();
@@ -57,12 +63,15 @@ public class Main extends JavaPlugin {
 				homesStorageFile.createNewFile();
 			if(!backStorageFile.exists())
 				backStorageFile.createNewFile();
+			if(!muteStorageFile.exists())
+				muteStorageFile.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		mainConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
 		homesStorage = YamlConfiguration.loadConfiguration(homesStorageFile);
 		backStorage = YamlConfiguration.loadConfiguration(backStorageFile);
+		muteStorage = YamlConfiguration.loadConfiguration(muteStorageFile);
 		
 		registerCommands();
 		registerEvents();
@@ -76,6 +85,19 @@ public class Main extends JavaPlugin {
                 m.broadcastNull();
             }
         }, 0L, 12000L);
+        scheduler3.scheduleSyncRepeatingTask(this, new Runnable() {
+        	@Override
+        	public void run() {
+        		long curtime = System.currentTimeMillis();
+        		for(String uuid : muteStorage.getKeys(false)) {
+        			long time = muteStorage.getLong(uuid);
+        			if(time<=curtime && time!=-1) {
+        				muteStorage.set(uuid, null);
+        				m.message(Bukkit.getPlayer(UUID.fromString(uuid)), "&fYour mute has expired");
+        			}
+        		}
+        	}
+        }, 0L, 20L);
         /*BukkitScheduler scheduler4 = getServer().getScheduler();
         scheduler4.scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
@@ -125,6 +147,10 @@ public class Main extends JavaPlugin {
 		return Main.getMain().backStorage;
 	}
 	
+	public static YamlConfiguration GetMuteStorage() {
+		return Main.getMain().muteStorage;
+	}
+	
 	public static void SaveMainConfig() {
 		Main main = Main.getMain();
 		try {
@@ -151,6 +177,15 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void SaveMuteStorage() {
+		Main main = Main.getMain();
+		try {
+			main.muteStorage.save(main.muteStorageFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private void registerCommands() {
 		getCommand("fly").setExecutor(new flight());
@@ -170,6 +205,8 @@ public class Main extends JavaPlugin {
 		getCommand("enderchest").setExecutor(new enderchest());
 		getCommand("invsee").setExecutor(new invsee());
 		getCommand("back").setExecutor(new back());
+		getCommand("mute").setExecutor(new mute());
+		getCommand("unmute").setExecutor(new unmute());
 	}
 	
 	private void registerEvents() {
@@ -177,7 +214,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new playerJoin(), this);
 		pm.registerEvents(new playerDeath(), this);
 		pm.registerEvents(new inventoryMoveItem(), this);
-		pm.registerEvents(new vehicleExitEvent(), this);
+		pm.registerEvents(new vehicleExit(), this);
+		pm.registerEvents(new asyncPlayerChat(), this);
 	}
 	
 	public void loadFromMysql() {

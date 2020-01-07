@@ -43,8 +43,26 @@ public class util {
 		Main.SaveBackStorage();
 	}
 	
-	public boolean IsVanished(Player pl) {
-		return pl!=null && Main.getVanished().contains(pl);
+	public boolean IsVanished(Player p) {
+		return p!=null && Main.getVanished().contains(p);
+	}
+	
+	public boolean IsMuted(Player p) {
+		return Main.GetMuteStorage().contains(p.getUniqueId().toString());
+	}
+	
+	public long GetMuteDuration(Player p) {
+		return this.IsMuted(p) ? Main.GetMuteStorage().getLong(p.getUniqueId().toString()) : 0;
+	}
+	
+	public void MutePlayer(Player p, long time) {	
+		Main.GetMuteStorage().set(p.getUniqueId().toString(), time);
+		Main.SaveMuteStorage();
+	}
+	
+	public void UnmutePlayer(Player p) {	
+		Main.GetMuteStorage().set(p.getUniqueId().toString(), null);
+		Main.SaveMuteStorage();
 	}
 	
 	public Location getBackLocation(Player p) {

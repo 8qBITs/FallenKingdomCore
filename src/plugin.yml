@@ -78,3 +78,15 @@ commands:
    tpdeny:
       description: Denies teleportation request.
       usage: /tpdeny
+   warp:
+      description: Teleports you to a warp.
+      usage: /warp <name>
+   warps:
+      description: Shows you a list of warps.
+      usage: /warps
+   setwarp:
+      description: Sets a warp.
+      usage: /setwarp <name>
+   delwarp:
+      description: Deletes a warp.
+      usage: /delwarp <name>

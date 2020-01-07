@@ -22,12 +22,13 @@ import me.qbit.core.commands.home.*;
 import me.qbit.core.events.inventoryMoveItem;
 import me.qbit.core.events.playerDeath;
 import me.qbit.core.events.playerJoin;
+import me.qbit.core.events.vehicleExitEvent;
 import me.qbit.core.utils.PlayerList;
 import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
 
 public class Main extends JavaPlugin {
-	//TODO: all the commands in plugins.yml
+	
 	messenger m = new messenger();
 	util u = new util();
 	static List<Player> vanished_pl = new ArrayList<Player>();
@@ -176,6 +177,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new playerJoin(), this);
 		pm.registerEvents(new playerDeath(), this);
 		pm.registerEvents(new inventoryMoveItem(), this);
+		pm.registerEvents(new vehicleExitEvent(), this);
 	}
 	
 	public void loadFromMysql() {

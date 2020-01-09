@@ -3,6 +3,7 @@ package me.qbit.core;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,9 @@ import me.qbit.core.ChunkLoader.ThreadKeepChunksLoaded;
 import me.qbit.core.commands.*;
 import me.qbit.core.commands.home.*;
 import me.qbit.core.commands.mute.*;
+import me.qbit.core.commands.tpa.tpa;
+import me.qbit.core.commands.tpa.tpaccept;
+import me.qbit.core.commands.tpa.tpdeny;
 import me.qbit.core.events.asyncPlayerChat;
 import me.qbit.core.events.inventoryMoveItem;
 import me.qbit.core.events.playerDeath;
@@ -36,6 +40,8 @@ public class Main extends JavaPlugin {
 	util u = new util();
 	static List<Player> vanished_pl = new ArrayList<Player>();
 	public ArrayList<ChunkHolder> myChunkHolders = new ArrayList<ChunkHolder>();
+	public HashMap<Player, Player> tpa = new HashMap<>();
+	public ArrayList<Player> tpaSent = new ArrayList<>();
 	ThreadKeepChunksLoaded threadKeepChunksLoaded;
 	static Main me;
 	File mainConfigFile;
@@ -207,6 +213,9 @@ public class Main extends JavaPlugin {
 		getCommand("back").setExecutor(new back());
 		getCommand("mute").setExecutor(new mute());
 		getCommand("unmute").setExecutor(new unmute());
+		getCommand("tpa").setExecutor(new tpa());
+		getCommand("tpaccept").setExecutor(new tpaccept());
+		getCommand("tpdeny").setExecutor(new tpdeny());
 	}
 	
 	private void registerEvents() {

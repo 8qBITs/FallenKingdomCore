@@ -24,6 +24,7 @@ public class chunkloader implements CommandExecutor {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean UnloadChunk(int id) {
 	    if (Main.getMain().myChunkHolders.size() <= id) {
 	      Chunk tempChunk = ((ChunkHolder)Main.getMain().myChunkHolders.get(id)).getChunk();

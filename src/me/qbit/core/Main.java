@@ -2,13 +2,17 @@ package me.qbit.core;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.GameMode;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -53,6 +57,8 @@ public class Main extends JavaPlugin {
 	YamlConfiguration backStorage;
 	YamlConfiguration muteStorage;
 	
+	int timer = 600;
+	
 	@Override
 	public void onEnable() {
 		
@@ -81,36 +87,9 @@ public class Main extends JavaPlugin {
 		
 		registerCommands();
 		registerEvents();
-		
-        BukkitScheduler scheduler3 = getServer().getScheduler();
-        scheduler3.scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public void run() {
-            	m.broadcastNull();
-                m.broadcast("&eThank you for playing on &6&lF&e&lallen &6&lK&e&lingdom&e, make sure to join our discord server: &fhttps://discord.gg/zhrW4zC");
-                m.broadcastNull();
-            }
-        }, 0L, 12000L);
-        scheduler3.scheduleSyncRepeatingTask(this, new Runnable() {
-        	@Override
-        	public void run() {
-        		long curtime = System.currentTimeMillis();
-        		for(String uuid : muteStorage.getKeys(false)) {
-        			long time = muteStorage.getLong(uuid);
-        			if(time<=curtime && time!=-1) {
-        				muteStorage.set(uuid, null);
-        				m.message(Bukkit.getPlayer(UUID.fromString(uuid)), "&fYour mute has expired");
-        			}
-        		}
-        	}
-        }, 0L, 20L);
-        /*BukkitScheduler scheduler4 = getServer().getScheduler();
-        scheduler4.scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public void run() {
-            	
-            }
-        }, 0L, 1L);*/
+		registerDefaultConfig();
+		initSchedulers();
+
 	}
 	
 	public static void UpdateVanishList(Player pl, boolean state) {
@@ -192,6 +171,48 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 	}
+	
+	private void AutoRestart() {
+		switch(timer) {
+		  case 600:
+			  // 10 min
+			  m.broadcastNull();
+			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 10 minutes!");
+			  m.broadcastNull();
+			  Bukkit.shutdown();
+		    break;
+		  case 300:
+			  // 5 min
+			  m.broadcastNull();
+			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 5 minutes!");
+			  m.broadcastNull();
+			  Bukkit.shutdown();
+			break;
+		  case 60:
+			  // 1 min
+			  m.broadcastNull();
+			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 1 minute!");
+			  m.broadcastNull();
+			  Bukkit.shutdown();
+			  break;
+		  case 30:
+			  // 30 sec
+			  m.broadcastNull();
+			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 30 sec!");
+			  m.broadcastNull();
+			  Bukkit.shutdown();
+			  break;
+		  case 10:
+			  // 10 sec
+			  m.broadcastNull();
+			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 10 sec!");
+			  m.broadcastNull();
+			  Bukkit.shutdown();
+			  break;
+		  default:
+		   // what?
+		}
+	}
 
 	private void registerCommands() {
 		getCommand("fly").setExecutor(new flight());
@@ -225,6 +246,60 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new inventoryMoveItem(), this);
 		pm.registerEvents(new vehicleExit(), this);
 		pm.registerEvents(new asyncPlayerChat(), this);
+	}
+	
+	private void registerDefaultConfig() {
+		if(GetMainConfig().getString("ServerName") == null) {
+			GetMainConfig().set("ServerName", "&eUnknown server.");
+			SaveMainConfig();
+		}
+	}
+	
+	private void initSchedulers() {
+		BukkitScheduler scheduler = getServer().getScheduler();
+		
+		// Auto restarter
+		
+        scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+            	DateFormat dateformat = new SimpleDateFormat("HH:mm");
+	            Date date = new Date();
+	            String first = "8:00";
+	            String second = "16:00";
+	            String third = "24:00";
+	            if (dateformat.format(date).equals(first) || dateformat.format(date).equals(second) || 
+	              dateformat.format(date).equals(third))
+	            	AutoRestart(); 
+            }
+        }, 0L, 12000L);
+		
+		// Advertiser
+		
+        scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+            	m.broadcastNull();
+                m.broadcast("&eThank you for playing on &6&lF&e&lallen &6&lK&e&lingdom&e, make sure to join our discord server: &fhttps://discord.gg/zhrW4zC");
+                m.broadcastNull();
+            }
+        }, 0L, 12000L);
+        
+        // mute bullshittery
+        
+        scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+        	@Override
+        	public void run() {
+        		long curtime = System.currentTimeMillis();
+        		for(String uuid : muteStorage.getKeys(false)) {
+        			long time = muteStorage.getLong(uuid);
+        			if(time<=curtime && time!=-1) {
+        				muteStorage.set(uuid, null);
+        				m.message(Bukkit.getPlayer(UUID.fromString(uuid)), "&fYour mute has expired");
+        			}
+        		}
+        	}
+        }, 0L, 20L);
 	}
 	
 	public void loadFromMysql() {

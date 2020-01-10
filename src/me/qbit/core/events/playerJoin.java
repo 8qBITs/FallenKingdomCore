@@ -39,7 +39,7 @@ public class playerJoin implements Listener {
 		try {
 			PlayerList playerList = new PlayerList(p,PlayerList.SIZE_FOUR);
 			String top = "&6&lF&e&lallen &6&lK&e&lingdom";
-			String bottom = "&eEngineer's Life";
+			String bottom = Main.GetMainConfig().getString("ServerName");
 			playerList.setHeaderFooter(ChatColor.translateAlternateColorCodes('&', top),ChatColor.translateAlternateColorCodes('&', bottom));
 		}catch(Exception e2){}
 		

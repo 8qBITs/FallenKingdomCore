@@ -33,7 +33,7 @@ public class tpdeny implements CommandExecutor {
 	                public void run() {
 	                  Main.getMain().tpaSent.remove(Main.getMain().tpa.get(p));
 	                }
-	              },  (5 * 20)); 
+	              },  (30 * 20)); 
 	        Main.getMain().tpa.put(p, null);
 	        return true;
 	      } 

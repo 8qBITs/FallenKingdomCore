@@ -77,9 +77,11 @@ commands:
       usage: /tpahere <player>
    tpaccept:
       description: Accepts teleportation request.
+      aliases: [tpyes]
       usage: /tpaccept
    tpdeny:
       description: Denies teleportation request.
+      aliases: [tpno]
       usage: /tpdeny
    warp:
       description: Teleports you to a warp.

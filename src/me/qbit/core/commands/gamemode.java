@@ -18,43 +18,47 @@ public class gamemode implements CommandExecutor {
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		Player p = (Player) arg0;
 		
-		if (u.isPlayerAdmin(p)) {
-			switch(arg3[0]) {
-			  case "0":
-				  p.setGameMode(GameMode.SURVIVAL);
-				  m.title(p, "&eGamemode set to SURVIVAL");
-			    break;
-			  case "survival":
-				  p.setGameMode(GameMode.SURVIVAL);
-				  m.title(p, "&eGamemode set to SURVIVAL");
-				  break;
-			  case "1":
-				  p.setGameMode(GameMode.CREATIVE);
-				  m.title(p, "&eGamemode set to CREATIVE");
-			    break;
-			  case "creative":
-				  p.setGameMode(GameMode.CREATIVE);
-				  m.title(p, "&eGamemode set to CREATIVE");
-			    break;
-			  case "2":
-				  p.setGameMode(GameMode.ADVENTURE);
-				  m.title(p, "&eGamemode set to ADVENTURE");
-			    break;
-			  case "adventure":
-				  p.setGameMode(GameMode.ADVENTURE);
-				  m.title(p, "&eGamemode set to ADVENTURE");
-			    break;
-			  case "3":
-				  p.setGameMode(GameMode.SPECTATOR);
-				  m.title(p, "&eGamemode set to SPECTATOR");
-			    break;
-			  case "spectator":
-				  p.setGameMode(GameMode.SPECTATOR);
-				  m.title(p, "&eGamemode set to SPECTATOR");
-			    break;
-			  default:
-			    m.title(p, "&cSorry, this gamemode does not exist.");
+		if(!(arg3.length == 0)) {
+			if (u.isPlayerAdmin(p)) {
+				switch(arg3[0]) {
+				  case "0":
+					  p.setGameMode(GameMode.SURVIVAL);
+					  m.title(p, "&eGamemode set to SURVIVAL");
+				    break;
+				  case "survival":
+					  p.setGameMode(GameMode.SURVIVAL);
+					  m.title(p, "&eGamemode set to SURVIVAL");
+					  break;
+				  case "1":
+					  p.setGameMode(GameMode.CREATIVE);
+					  m.title(p, "&eGamemode set to CREATIVE");
+				    break;
+				  case "creative":
+					  p.setGameMode(GameMode.CREATIVE);
+					  m.title(p, "&eGamemode set to CREATIVE");
+				    break;
+				  case "2":
+					  p.setGameMode(GameMode.ADVENTURE);
+					  m.title(p, "&eGamemode set to ADVENTURE");
+				    break;
+				  case "adventure":
+					  p.setGameMode(GameMode.ADVENTURE);
+					  m.title(p, "&eGamemode set to ADVENTURE");
+				    break;
+				  case "3":
+					  p.setGameMode(GameMode.SPECTATOR);
+					  m.title(p, "&eGamemode set to SPECTATOR");
+				    break;
+				  case "spectator":
+					  p.setGameMode(GameMode.SPECTATOR);
+					  m.title(p, "&eGamemode set to SPECTATOR");
+				    break;
+				  default:
+				    m.title(p, "&cSorry, this gamemode does not exist.");
+				}
 			}
+		} else {
+			m.title(p, "&cPlease provide a gamemode.");
 		}
 		
 	return true;

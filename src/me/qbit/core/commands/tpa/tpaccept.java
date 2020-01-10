@@ -27,7 +27,8 @@ public class tpaccept implements CommandExecutor {
 	        return true;
 	      } 
 	      if (Main.getMain().tpa.get(p) != null) {
-	    	u.setBackLocation(p);
+	    	  // make /back work
+	    	u.setBackLocation((Player)Main.getMain().tpa.get(p));
 	        ((Player)Main.getMain().tpa.get(p)).teleport((Entity)p);
 	        m.title(p, "&eAccepted teleport request.");
 	        m.title(((Player)Main.getMain().tpa.get(p)), "&eTeleport request accepted.");
@@ -36,7 +37,7 @@ public class tpaccept implements CommandExecutor {
 	                public void run() {
 	                  Main.getMain().tpaSent.remove(Main.getMain().tpa.get(p));
 	                }
-	              },  (5 * 20)); 
+	              },  (30 * 20)); 
 	        Main.getMain().tpa.put(p, null);
 	        return true;
 	      } 

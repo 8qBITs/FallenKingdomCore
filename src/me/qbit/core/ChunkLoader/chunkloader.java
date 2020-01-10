@@ -30,7 +30,7 @@ public class chunkloader implements CommandExecutor {
 	      Chunk tempChunk = ((ChunkHolder)Main.getMain().myChunkHolders.get(id)).getChunk();
 	      Main.getMain().myChunkHolders.remove(id);
 	      if (tempChunk.isLoaded())
-	        return tempChunk.unload(true, true); 
+	        return tempChunk.unload(true, true);
 	      return false;
 	    } 
 	    return false;

@@ -173,45 +173,33 @@ public class Main extends JavaPlugin {
 	}
 	
 	private void AutoRestart() {
+		m.broadcastNull();
 		switch(timer) {
 		  case 600:
 			  // 10 min
-			  m.broadcastNull();
 			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 10 minutes!");
-			  m.broadcastNull();
-			  Bukkit.shutdown();
 		    break;
 		  case 300:
 			  // 5 min
-			  m.broadcastNull();
 			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 5 minutes!");
-			  m.broadcastNull();
-			  Bukkit.shutdown();
 			break;
 		  case 60:
 			  // 1 min
-			  m.broadcastNull();
 			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 1 minute!");
-			  m.broadcastNull();
-			  Bukkit.shutdown();
 			  break;
 		  case 30:
 			  // 30 sec
-			  m.broadcastNull();
 			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 30 sec!");
-			  m.broadcastNull();
-			  Bukkit.shutdown();
 			  break;
 		  case 10:
 			  // 10 sec
-			  m.broadcastNull();
 			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 10 sec!");
-			  m.broadcastNull();
-			  Bukkit.shutdown();
 			  break;
 		  default:
 		   // what?
 		}
+		m.broadcastNull();
+		Bukkit.shutdown();
 	}
 
 	private void registerCommands() {

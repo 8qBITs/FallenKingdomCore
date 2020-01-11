@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -56,8 +57,6 @@ public class Main extends JavaPlugin {
 	YamlConfiguration homesStorage;
 	YamlConfiguration backStorage;
 	YamlConfiguration muteStorage;
-	
-	int timer = 600;
 	
 	@Override
 	public void onEnable() {
@@ -173,33 +172,24 @@ public class Main extends JavaPlugin {
 	}
 	
 	private void AutoRestart() {
-		m.broadcastNull();
-		switch(timer) {
-		  case 600:
-			  // 10 min
-			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 10 minutes!");
-		    break;
-		  case 300:
-			  // 5 min
-			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 5 minutes!");
-			break;
-		  case 60:
-			  // 1 min
-			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 1 minute!");
-			  break;
-		  case 30:
-			  // 30 sec
-			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 30 sec!");
-			  break;
-		  case 10:
-			  // 10 sec
-			  m.broadcast(" &4&lWARNING! &ethis server is scheduled to restart in 10 sec!");
-			  break;
-		  default:
-		   // what?
-		}
-		m.broadcastNull();
-		Bukkit.shutdown();
+		BukkitScheduler sch = getServer().getScheduler();
+		sch.scheduleSyncRepeatingTask(this, new Runnable(){
+			int timer = 601;
+			final int[] times = new int[] {600,300,60,30,10};
+			@Override
+			public void run() {
+				timer--;
+				if(!Arrays.stream(times).anyMatch(i -> i == timer))
+					return;
+				int minutes = (int)Math.floor(timer/60), seconds = timer%60;
+				m.broadcastNull();
+				m.broadcast(String.format(" &4&lWARNING! &ethis server is scheduled to restart in %d minute%s %d second%s!", minutes, minutes>1 ? "s" : "", seconds, seconds>1 ? "s" : ""));
+				m.broadcastNull();
+				Bukkit.shutdown();
+				sch.cancelAllTasks();
+			}
+		}, 0L, 20L);
+		
 	}
 
 	private void registerCommands() {

@@ -11,6 +11,12 @@ import me.qbit.core.Main;
 public class util {
 	
 	messenger m = new messenger();
+	configuration backStorageClass = new configuration("backs.yml");
+	YamlConfiguration backStorage = backStorageClass.getConfig();
+	configuration homeStorageClass = new configuration("homes.yml");
+	YamlConfiguration homes = homeStorageClass.getConfig();
+	configuration muteStorageClass = new configuration("mutes.yml");
+	YamlConfiguration mutes = muteStorageClass.getConfig();
 	
 	public boolean isPlayerAdmin(Player p) {
 		if(!p.hasPermission("core.admin"))
@@ -19,18 +25,16 @@ public class util {
 	}
 	
 	public void setBackLocation(Player p) {
-		YamlConfiguration backStorage = Main.GetBackStorage();
 		Location loc = p.getLocation();
 		String k = p.getUniqueId().toString();			
 		backStorage.set(k+".world",loc.getWorld().getName());
 		backStorage.set(k+".x",loc.getX());
 		backStorage.set(k+".y",loc.getY());
 		backStorage.set(k+".z",loc.getZ());
-		Main.SaveBackStorage();
+		backStorageClass.saveConfig();
 	}
 	
 	public void setBackLocation(Player p, Location loc) {
-		YamlConfiguration backStorage = Main.GetBackStorage();
 		String k = p.getUniqueId().toString();
 		if(loc==null) {
 			backStorage.set(k,null);
@@ -40,7 +44,7 @@ public class util {
 			backStorage.set(k+".y",loc.getY());
 			backStorage.set(k+".z",loc.getZ());
 		}
-		Main.SaveBackStorage();
+		backStorageClass.saveConfig();
 	}
 	
 	public boolean IsVanished(Player p) {
@@ -48,25 +52,24 @@ public class util {
 	}
 	
 	public boolean IsMuted(Player p) {
-		return Main.GetMuteStorage().contains(p.getUniqueId().toString());
+		return mutes.contains(p.getUniqueId().toString());
 	}
 	
 	public long GetMuteDuration(Player p) {
-		return this.IsMuted(p) ? Main.GetMuteStorage().getLong(p.getUniqueId().toString()) : 0;
+		return this.IsMuted(p) ? mutes.getLong(p.getUniqueId().toString()) : 0;
 	}
 	
 	public void MutePlayer(Player p, long time) {	
-		Main.GetMuteStorage().set(p.getUniqueId().toString(), time);
-		Main.SaveMuteStorage();
+		mutes.set(p.getUniqueId().toString(), time);
+		muteStorageClass.saveConfig();
 	}
 	
 	public void UnmutePlayer(Player p) {	
-		Main.GetMuteStorage().set(p.getUniqueId().toString(), null);
-		Main.SaveMuteStorage();
+		mutes.set(p.getUniqueId().toString(), null);
+		muteStorageClass.saveConfig();
 	}
 	
 	public Location getBackLocation(Player p) {
-		YamlConfiguration backStorage = Main.GetBackStorage();
 		String k = p.getUniqueId().toString();
 		if(!backStorage.contains(k))
 			return null;
@@ -74,7 +77,6 @@ public class util {
 	}
 	
 	public ConfigurationSection getPlayerHomes(Player p) {
-		YamlConfiguration homes = Main.GetHomeStorage();
 		if(!homes.contains(p.getUniqueId().toString()) || !homes.isConfigurationSection(p.getUniqueId().toString())) {
 			homes.createSection(p.getUniqueId().toString());
 		}

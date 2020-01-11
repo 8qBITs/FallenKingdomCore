@@ -35,6 +35,7 @@ import me.qbit.core.events.playerDeath;
 import me.qbit.core.events.playerJoin;
 import me.qbit.core.events.vehicleExit;
 import me.qbit.core.utils.PlayerList;
+import me.qbit.core.utils.configuration;
 import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
 
@@ -48,43 +49,12 @@ public class Main extends JavaPlugin {
 	public ArrayList<Player> tpaSent = new ArrayList<>();
 	ThreadKeepChunksLoaded threadKeepChunksLoaded;
 	static Main me;
-	File mainConfigFile;
-	File homesStorageFile;
-	File backStorageFile;
-	File muteStorageFile;
-	YamlConfiguration mainConfig;
-	YamlConfiguration homesStorage;
-	YamlConfiguration backStorage;
-	YamlConfiguration muteStorage;
-	
 	int timer = 600;
 	
 	@Override
 	public void onEnable() {
-		
 		me = this;
-		getDataFolder().mkdir();
-		mainConfigFile = new File(getDataFolder(), "config.yml");
-		homesStorageFile = new File(getDataFolder(), "homes.yml");
-		backStorageFile = new File(getDataFolder(), "backs.yml");
-		muteStorageFile = new File(getDataFolder(), "mutes.yml");
-		try {
-			if(!mainConfigFile.exists())
-				mainConfigFile.createNewFile();
-			if(!homesStorageFile.exists())
-				homesStorageFile.createNewFile();
-			if(!backStorageFile.exists())
-				backStorageFile.createNewFile();
-			if(!muteStorageFile.exists())
-				muteStorageFile.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		mainConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
-		homesStorage = YamlConfiguration.loadConfiguration(homesStorageFile);
-		backStorage = YamlConfiguration.loadConfiguration(backStorageFile);
-		muteStorage = YamlConfiguration.loadConfiguration(muteStorageFile);
-		
+
 		registerCommands();
 		registerEvents();
 		registerDefaultConfig();
@@ -118,58 +88,6 @@ public class Main extends JavaPlugin {
 			copy.add(Bukkit.getPlayer(p.getUniqueId())); // deep copy
 		}
 		return copy;
-	}
-	
-	public static YamlConfiguration GetMainConfig() {
-		return Main.getMain().mainConfig;
-	}
-	
-	public static YamlConfiguration GetHomeStorage() {
-		return Main.getMain().homesStorage;
-	}
-	
-	public static YamlConfiguration GetBackStorage() {
-		return Main.getMain().backStorage;
-	}
-	
-	public static YamlConfiguration GetMuteStorage() {
-		return Main.getMain().muteStorage;
-	}
-	
-	public static void SaveMainConfig() {
-		Main main = Main.getMain();
-		try {
-			main.mainConfig.save(main.mainConfigFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void SaveHomeConfig() {
-		Main main = Main.getMain();
-		try {
-			main.homesStorage.save(main.homesStorageFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void SaveBackStorage() {
-		Main main = Main.getMain();
-		try {
-			main.backStorage.save(main.backStorageFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void SaveMuteStorage() {
-		Main main = Main.getMain();
-		try {
-			main.muteStorage.save(main.muteStorageFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private void AutoRestart() {
@@ -237,9 +155,12 @@ public class Main extends JavaPlugin {
 	}
 	
 	private void registerDefaultConfig() {
-		if(GetMainConfig().getString("ServerName") == null) {
-			GetMainConfig().set("ServerName", "&eUnknown server.");
-			SaveMainConfig();
+		configuration mainStorageClass = new configuration("config.yml");
+		YamlConfiguration config = mainStorageClass.getConfig();
+		
+		if(config.getString("ServerName") == null) {
+			config.set("ServerName", "&eUnknown server.");
+			mainStorageClass.saveConfig();
 		}
 	}
 	
@@ -275,14 +196,17 @@ public class Main extends JavaPlugin {
         
         // mute bullshittery
         
+        configuration muteStorageClass = new configuration("mutes.yml");
+    	YamlConfiguration mutes = muteStorageClass.getConfig();
+        
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
         	@Override
         	public void run() {
         		long curtime = System.currentTimeMillis();
-        		for(String uuid : muteStorage.getKeys(false)) {
-        			long time = muteStorage.getLong(uuid);
+        		for(String uuid : mutes.getKeys(false)) {
+        			long time = mutes.getLong(uuid);
         			if(time<=curtime && time!=-1) {
-        				muteStorage.set(uuid, null);
+        				mutes.set(uuid, null);
         				m.message(Bukkit.getPlayer(UUID.fromString(uuid)), "&fYour mute has expired");
         			}
         		}

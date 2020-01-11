@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import me.qbit.core.Main;
 import me.qbit.core.utils.PlayerList;
+import me.qbit.core.utils.configuration;
 import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
 
@@ -18,6 +19,9 @@ public class playerJoin implements Listener {
 
 	messenger m = new messenger();
 	util u = new util();
+	
+	configuration mainStorageClass = new configuration("config.yml");
+	YamlConfiguration config = mainStorageClass.getConfig();
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
@@ -39,7 +43,7 @@ public class playerJoin implements Listener {
 		try {
 			PlayerList playerList = new PlayerList(p,PlayerList.SIZE_FOUR);
 			String top = "&6&lF&e&lallen &6&lK&e&lingdom";
-			String bottom = Main.GetMainConfig().getString("ServerName");
+			String bottom = config.getString("ServerName");
 			playerList.setHeaderFooter(ChatColor.translateAlternateColorCodes('&', top),ChatColor.translateAlternateColorCodes('&', bottom));
 		}catch(Exception e2){}
 		

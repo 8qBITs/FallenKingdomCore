@@ -1,7 +1,7 @@
 name: ServerCore
 version: 1.1
 description: Core commands & utils
-author: 8qBIT
+authors: [8qBIT,Elipse458]
 
 main: me.qbit.core.Main
 

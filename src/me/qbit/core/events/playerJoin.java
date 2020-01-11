@@ -20,9 +20,6 @@ public class playerJoin implements Listener {
 	messenger m = new messenger();
 	util u = new util();
 	
-	configuration mainStorageClass = new configuration("config.yml");
-	YamlConfiguration config = mainStorageClass.getConfig();
-	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
@@ -33,8 +30,6 @@ public class playerJoin implements Listener {
 			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&lWelcome &f&l" + p.getDisplayName() + " &e&lhave fun playing!"));
 		}
 		m.sendnull(p);
-		m.message(p, "&lWARNING! &ePlease use external heaters on your own responsibility as they are known to bug and remove items from furnaces!");
-		m.sendnull(p);
 		m.message(p, "&6&lINFO! &eAll server features are currently in beta anything could and will change, please be patient..!");
 		m.sendnull(p);
 		
@@ -43,7 +38,7 @@ public class playerJoin implements Listener {
 		try {
 			PlayerList playerList = new PlayerList(p,PlayerList.SIZE_FOUR);
 			String top = "&6&lF&e&lallen &6&lK&e&lingdom";
-			String bottom = config.getString("ServerName");
+			String bottom = Main.GetMainConfig().getString("ServerName");
 			playerList.setHeaderFooter(ChatColor.translateAlternateColorCodes('&', top),ChatColor.translateAlternateColorCodes('&', bottom));
 		}catch(Exception e2){}
 		

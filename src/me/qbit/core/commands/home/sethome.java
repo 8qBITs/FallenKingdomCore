@@ -5,11 +5,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import me.qbit.core.Main;
-import me.qbit.core.utils.configuration;
 import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
 
@@ -17,9 +15,6 @@ public class sethome implements CommandExecutor {
 
 	messenger m = new messenger();
 	util u = new util();
-	
-	configuration homeStorageClass = new configuration("homes.yml");
-	YamlConfiguration homes = homeStorageClass.getConfig();
 	
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
@@ -43,7 +38,7 @@ public class sethome implements CommandExecutor {
 				sec.set(arg3[1]+".y",loc.getY());
 				sec.set(arg3[1]+".z",loc.getZ());
 			}
-			homeStorageClass.saveConfig();
+			Main.SaveHomeConfig();
 		}
 		
 		return true;

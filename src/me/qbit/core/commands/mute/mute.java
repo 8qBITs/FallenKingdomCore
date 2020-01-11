@@ -1,6 +1,5 @@
 package me.qbit.core.commands.mute;
 
-import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

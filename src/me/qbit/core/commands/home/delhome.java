@@ -4,11 +4,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import me.qbit.core.Main;
-import me.qbit.core.utils.configuration;
 import me.qbit.core.utils.messenger;
 import me.qbit.core.utils.util;
 
@@ -16,9 +14,6 @@ public class delhome implements CommandExecutor {
 
 	messenger m = new messenger();
 	util u = new util();
-	
-	configuration homeStorageClass = new configuration("homes.yml");
-	YamlConfiguration homes = homeStorageClass.getConfig();
 	
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
@@ -28,15 +23,15 @@ public class delhome implements CommandExecutor {
 			if(sec.contains("home")) {				
 				m.message(p, "&fDeleted home 'home'");
 				sec.set("home", null);
-				homeStorageClass.saveConfig();
+				Main.SaveHomeConfig();
 			} else {
-				m.message(p, "Home 'home' not set!");				
+				m.message(p, "Home 'home' not set!");		
 			}
 		} else if(arg3.length!=0) {
 			if(sec.contains(arg3[0])) {
 				m.message(p, String.format("&fDeleted home '%s'", arg3[0]));
 				sec.set(arg3[0], null);
-				homeStorageClass.saveConfig();
+				Main.SaveHomeConfig();
 			} else {
 				m.message(p, String.format("Home '%s' not set!", arg3[0]));
 			}

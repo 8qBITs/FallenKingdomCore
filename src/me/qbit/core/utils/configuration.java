@@ -13,7 +13,6 @@ public class configuration {
 	YamlConfiguration config;
 	
 	public configuration(String name) {
-		Main.getMain().getDataFolder().mkdir();
 		configFile = new File(Main.getMain().getDataFolder(), name);
 		try {
 			if(!configFile.exists())

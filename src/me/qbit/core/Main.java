@@ -50,18 +50,7 @@ public class Main extends JavaPlugin {
 	public ArrayList<Player> tpaSent = new ArrayList<>();
 	ThreadKeepChunksLoaded threadKeepChunksLoaded;
 	static Main me;
-<<<<<<< HEAD
 	int timer = 600;
-=======
-	File mainConfigFile;
-	File homesStorageFile;
-	File backStorageFile;
-	File muteStorageFile;
-	YamlConfiguration mainConfig;
-	YamlConfiguration homesStorage;
-	YamlConfiguration backStorage;
-	YamlConfiguration muteStorage;
->>>>>>> 2d0be8a99674f8d922ca4cda53eab8da6ac9aa56
 	
 	@Override
 	public void onEnable() {

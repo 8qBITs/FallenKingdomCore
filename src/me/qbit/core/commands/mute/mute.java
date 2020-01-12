@@ -15,7 +15,6 @@ import me.qbit.core.utils.util;
 public class mute implements CommandExecutor {
 	util u = new util();
 	messenger m = new messenger();
-	Pattern pattern = Pattern.compile("\\d+[hmsdyHMSDY]");
 	
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
@@ -28,30 +27,8 @@ public class mute implements CommandExecutor {
 					m.message(p, "&fMuted "+target.getName());
 					m.message(target, "You have been muted");
 				} else {
-					Matcher matcher = pattern.matcher(arg3[1]);
-					long time = 0;
-					String time_str = "";
-					while(matcher.find()) {
-						String s = matcher.group();
-						s = s.toLowerCase();
-						String clean_s = s.replaceAll("[hmsdy]", "");
-						if(s.contains("y")) {
-							time+=Integer.parseInt(clean_s)*365*24*60*60;
-							time_str+=clean_s+" year(s) ";
-						} else if(s.contains("d")) {
-							time+=Integer.parseInt(clean_s)*24*60*60;
-							time_str+=clean_s+" day(s) ";
-						} else if(s.contains("h")) {
-							time+=Integer.parseInt(clean_s)*60*60;
-							time_str+=clean_s+" hour(s) ";
-						} else if(s.contains("m")) {
-							time+=Integer.parseInt(clean_s)*60;
-							time_str+=clean_s+" minute(s) ";
-						} else if(s.contains("s")) {
-							time+=Integer.parseInt(clean_s);
-							time_str+=clean_s+" second(s) ";
-						}
-					}
+					long time = u.parseTimeFromString(arg3[1]);
+					String time_str = u.parseTimeFormat(arg3[1]);
 					if(time<=0) {
 						m.message(p, "Invalid time");
 					}

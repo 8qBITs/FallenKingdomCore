@@ -95,3 +95,6 @@ commands:
    delwarp:
       description: Deletes a warp.
       usage: /delwarp <name>
+   kit:
+      description: Gives you an item kit.
+      usage: /kit <name>

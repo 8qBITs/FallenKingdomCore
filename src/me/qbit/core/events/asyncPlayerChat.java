@@ -1,5 +1,6 @@
 package me.qbit.core.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +15,10 @@ public class asyncPlayerChat implements Listener {
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
-		if(u.IsMuted(p)) {
+		if(u.isPlayerAdmin(p)) {
+			e.setMessage(ChatColor.translateAlternateColorCodes('&', e.getMessage()));
+		}
+		if(u.IsMuted(p) && !u.isPlayerAdmin(p)) {
 			m.message(p, "You're muted");
 			e.setCancelled(true);
 		}

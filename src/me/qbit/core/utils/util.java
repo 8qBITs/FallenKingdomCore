@@ -1,5 +1,8 @@
 package me.qbit.core.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -11,10 +14,15 @@ import me.qbit.core.Main;
 public class util {
 	
 	messenger m = new messenger();
+	Pattern time_pattern = Pattern.compile("\\d+[hmsdyHMSDY]");
 	
 	public boolean isPlayerAdmin(Player p) {
 		if(!p.hasPermission("core.admin"))
 			m.fullTitle(p, "&c&lWHOOPS!","&eSorry, but you are not allowed to use this command.");
+		return p.hasPermission("core.admin");
+	}
+	
+	public boolean isPlayerAdminSilent(Player p) {
 		return p.hasPermission("core.admin");
 	}
 	
@@ -107,6 +115,66 @@ public class util {
 	
 	public boolean getKeepInventory(Player p) {
 		return isPlayerAdmin(p) || p.hasPermission("core.keepinventory");
+	}
+	
+	public long parseTimeFromString(String t) {
+		Matcher matcher = time_pattern.matcher(t);
+		long time = 0;
+		while(matcher.find()) {
+			String s = matcher.group();
+			s = s.toLowerCase();
+			String clean_s = s.replaceAll("[hmsdy]", "");
+			if(s.contains("y")) {
+				time+=Integer.parseInt(clean_s)*31536000;
+			} else if(s.contains("d")) {
+				time+=Integer.parseInt(clean_s)*86400;
+			} else if(s.contains("h")) {
+				time+=Integer.parseInt(clean_s)*3600;
+			} else if(s.contains("m")) {
+				time+=Integer.parseInt(clean_s)*60;
+			} else if(s.contains("s")) {
+				time+=Integer.parseInt(clean_s);
+			}
+		}
+		return time;
+	}
+	
+	public String parseTimeFormat(String t) {
+		Matcher matcher = time_pattern.matcher(t);
+		String time_str = "";
+		while(matcher.find()) {
+			String s = matcher.group();
+			s = s.toLowerCase();
+			String clean_s = s.replaceAll("[hmsdy]", "");
+			if(s.contains("y")) {
+				time_str+=clean_s+" year(s) ";
+			} else if(s.contains("d")) {
+				time_str+=clean_s+" day(s) ";
+			} else if(s.contains("h")) {
+				time_str+=clean_s+" hour(s) ";
+			} else if(s.contains("m")) {
+				time_str+=clean_s+" minute(s) ";
+			} else if(s.contains("s")) {
+				time_str+=clean_s+" second(s) ";
+			}
+		}
+		return time_str;
+	}
+	
+	public String parseTimeFormat(long t) {
+		int years,days,hours,minutes;
+		String time_str = "";
+		if((years = (int)Math.floor(t/31536000))>0)
+			time_str+=years+" year(s) "; t-=years*31536000;
+		if((days = (int)Math.floor(t/86400))>0)
+			time_str+=days+" day(s) "; t-=days*86400;
+		if((hours = (int)Math.floor(t/3600))>0)
+			time_str+=hours+" hour(s) "; t-=hours*3600;
+		if((minutes = (int)Math.floor(t/60))>0)
+			time_str+=minutes+" minute(s) "; t-=minutes*60;
+		if(t>0)
+			time_str+=t+" second(s) ";
+		return time_str;
 	}
 	
 }

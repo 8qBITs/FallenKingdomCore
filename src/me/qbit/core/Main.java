@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -50,11 +51,15 @@ public class Main extends JavaPlugin {
 	File mainConfigFile;
 	File homesStorageFile;
 	File backStorageFile;
-	File muteStorageFile;
+	File delayStorageFile;
+	File kitStorageFile;
 	YamlConfiguration mainConfig;
 	YamlConfiguration homesStorage;
 	YamlConfiguration backStorage;
-	YamlConfiguration muteStorage;
+	YamlConfiguration delayStorage;
+	YamlConfiguration kitStorage;
+	ConfigurationSection muteStorage;
+	ConfigurationSection kitDelayStorage;
 	
 	int timer = 600;
 	
@@ -66,7 +71,8 @@ public class Main extends JavaPlugin {
 		mainConfigFile = new File(getDataFolder(), "config.yml");
 		homesStorageFile = new File(getDataFolder(), "homes.yml");
 		backStorageFile = new File(getDataFolder(), "backs.yml");
-		muteStorageFile = new File(getDataFolder(), "mutes.yml");
+		delayStorageFile = new File(getDataFolder(), "delays.yml");
+		kitStorageFile = new File(getDataFolder(), "kits.yml");
 		try {
 			if(!mainConfigFile.exists())
 				mainConfigFile.createNewFile();
@@ -74,19 +80,28 @@ public class Main extends JavaPlugin {
 				homesStorageFile.createNewFile();
 			if(!backStorageFile.exists())
 				backStorageFile.createNewFile();
-			if(!muteStorageFile.exists())
-				muteStorageFile.createNewFile();
+			if(!delayStorageFile.exists())
+				delayStorageFile.createNewFile();
+			if(!kitStorageFile.exists())
+				kitStorageFile.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		mainConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
 		homesStorage = YamlConfiguration.loadConfiguration(homesStorageFile);
 		backStorage = YamlConfiguration.loadConfiguration(backStorageFile);
-		muteStorage = YamlConfiguration.loadConfiguration(muteStorageFile);
+		delayStorage = YamlConfiguration.loadConfiguration(delayStorageFile);
+		kitStorage = YamlConfiguration.loadConfiguration(kitStorageFile);
 		
-		if(GetMainConfig().getString("ServerName").equals(null)) {
-			GetMainConfig().set("ServerName", "&eUnknown Server");
-		}
+		if(!delayStorage.contains("mute"))
+			delayStorage.createSection("mute");
+		if(!delayStorage.contains("kits"))
+			delayStorage.createSection("kits");
+		if(!mainConfig.contains("ServerName"))
+			mainConfig.set("ServerName", "&eUnknown Server");
+		
+		muteStorage = delayStorage.getConfigurationSection("mute");
+		kitDelayStorage = delayStorage.getConfigurationSection("kits");
 		
 		registerCommands();
 		registerEvents();
@@ -135,8 +150,16 @@ public class Main extends JavaPlugin {
 		return Main.getMain().backStorage;
 	}
 	
-	public static YamlConfiguration GetMuteStorage() {
+	public static ConfigurationSection GetMuteStorage() {
 		return Main.getMain().muteStorage;
+	}
+	
+	public static YamlConfiguration GetKitStorage() {
+		return Main.getMain().kitStorage;
+	}
+	
+	public static ConfigurationSection GetKitDelayStorage( ) {
+		return Main.getMain().kitDelayStorage;
 	}
 	
 	public static void SaveMainConfig() {
@@ -166,13 +189,30 @@ public class Main extends JavaPlugin {
 		}
 	}
 	
-	public static void SaveMuteStorage() {
+	public static void SaveDelayStorage() {
 		Main main = Main.getMain();
 		try {
-			main.muteStorage.save(main.muteStorageFile);
+			main.delayStorage.save(main.delayStorageFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void SaveMuteStorage() {
+		SaveDelayStorage();
+	}
+	
+	public static void SaveKitStorage() {
+		Main main = Main.getMain();
+		try {
+			main.kitStorage.save(main.kitStorageFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void SaveKitDelayStorage() {
+		SaveDelayStorage();
 	}
 	
 	private void AutoRestart() {
@@ -219,6 +259,7 @@ public class Main extends JavaPlugin {
 		getCommand("tpa").setExecutor(new tpa());
 		getCommand("tpaccept").setExecutor(new tpaccept());
 		getCommand("tpdeny").setExecutor(new tpdeny());
+		getCommand("kit").setExecutor(new kit());
 	}
 	
 	private void registerEvents() {
@@ -254,7 +295,7 @@ public class Main extends JavaPlugin {
 	              dateformat.format(date).equals(third))
 	            	AutoRestart(); 
             }
-        }, 0L, 12000L);
+        }, 0L, 1200L);
 		
 		// Advertiser
 		
@@ -277,6 +318,7 @@ public class Main extends JavaPlugin {
         			long time = muteStorage.getLong(uuid);
         			if(time<=curtime && time!=-1) {
         				muteStorage.set(uuid, null);
+        				SaveMuteStorage();
         				m.message(Bukkit.getPlayer(UUID.fromString(uuid)), "&fYour mute has expired");
         			}
         		}

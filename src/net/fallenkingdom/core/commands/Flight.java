@@ -34,7 +34,11 @@ public class Flight implements CommandCallable {
 			return u.success;
 		}
 		
-
+		if(!(testPermission(source))) {
+			msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
+			return u.success;
+		}
+		
 		if(p.get(Keys.CAN_FLY).get() == false) {
 			p.offer(Keys.CAN_FLY, true);
 			msg.sendAction("&eFlight enabled.");

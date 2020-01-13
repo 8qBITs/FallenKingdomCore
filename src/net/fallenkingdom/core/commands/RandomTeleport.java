@@ -40,6 +40,11 @@ public class RandomTeleport implements CommandCallable {
 			return u.success;
 		}
 		
+		if(!(testPermission(source))) {
+			msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
+			return u.success;
+		}
+		
 		int x = rand.nextInt(5000);
 		int z = rand.nextInt(5000);
 		int y = 0;

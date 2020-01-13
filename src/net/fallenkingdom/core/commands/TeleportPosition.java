@@ -39,6 +39,11 @@ public class TeleportPosition implements CommandCallable {
 			return u.success;
 		}
 		
+		if(!(testPermission(source))) {
+			msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
+			return u.success;
+		}
+		
 		String[] args = arguments.split(" ");
 		
 		if(!(args.length == 0)) {

@@ -23,7 +23,7 @@ import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
 
-@Plugin(id = "fkcore", name = "FallenKingdomCore", version = "1.0", authors = "8qBIT, Elipse458")
+@Plugin(id = "fkcore", name = "FallenKingdomCore", version = "0.6", authors = "8qBIT, Elipse458")
 public class Main {
 	
 	static Main me;

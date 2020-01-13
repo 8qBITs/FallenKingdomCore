@@ -34,6 +34,11 @@ public class Back implements CommandCallable {
 			return u.success;
 		}
 		
+		if(!(testPermission(source))) {
+			msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
+			return u.success;
+		}
+		
 		if(u.getBackLocation() != null) {
 			Location current = p.getLocation();
 			msg.sendAction(String.format("&eTeleporting back."));

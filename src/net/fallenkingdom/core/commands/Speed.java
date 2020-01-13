@@ -34,10 +34,13 @@ public class Speed implements CommandCallable {
 			return u.success;
 		}
 		
+		if(!(testPermission(source))) {
+			msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
+			return u.success;
+		}
+		
 		String[] args = arguments.split(" ");
-		// stuff
-		
-		
+
 		// ERROR WARNING
 		// When speed value is not provided it throws an error i have no idea how to solve it
 		// Checking for null does not work

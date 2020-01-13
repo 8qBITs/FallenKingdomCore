@@ -7,13 +7,18 @@ import org.spongepowered.api.text.title.Title;
 
 public class Messenger {
 	
+	Player p;
+	
+	public Messenger(Player p) {
+		this.p = p;
+	}
 	
 	// Make things accept color formatting
 	private Text iCanHasColor(String input) {
 		return Text.of(TextSerializers.FORMATTING_CODE.deserialize(input));
 	}
 	
-	public void sendFullTitle(Player p, String title, String subtitle) {
+	public void sendFullTitle(String title, String subtitle) {
 		Title build_title = Title.builder()
 				.title(iCanHasColor(title))
 				.subtitle(iCanHasColor(subtitle))
@@ -21,21 +26,21 @@ public class Messenger {
 		p.sendTitle(build_title);
 	}
 	
-	public void sendTitle(Player p, String title) {
+	public void sendTitle(String title) {
 		Title build_title = Title.builder()
 				.title(iCanHasColor(title))
 				.fadeOut(100).build();
 		p.sendTitle(build_title);
 	}
 	
-	public void sendSubTitle(Player p, String subtitle) {
+	public void sendSubTitle(String subtitle) {
 		Title build_title = Title.builder()
 				.subtitle(iCanHasColor(subtitle))
 				.fadeOut(100).build();
 		p.sendTitle(build_title);
 	}
 	
-	public void sendAction(Player p, String action) {
+	public void sendAction(String action) {
 		Title build_title = Title.builder()
 				.actionBar(iCanHasColor(action))
 				.stay(100).build();

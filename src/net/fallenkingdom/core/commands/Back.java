@@ -17,9 +17,6 @@ import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 
 public class Back implements CommandCallable {
-
-	Utils u = new Utils();
-	Messenger msg = new Messenger();
 	
 	private final Optional<Text> desc = Optional.of(Text.of("Teleports you to previous location."));
     private final Optional<Text> help = Optional.of(Text.of("Get teleported to your previous location."));
@@ -28,21 +25,24 @@ public class Back implements CommandCallable {
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
+    	
+    	Player p = (Player) source;
+		Utils u = new Utils(p);
+		Messenger msg = new Messenger(p);
+		
 		if(!(source instanceof Player)) {
 			return u.success;
 		}
 		
-		Player p = (Player) source;
-		
-		if(u.getBackLocation(p) != null) {
+		if(u.getBackLocation() != null) {
 			Location current = p.getLocation();
-			msg.sendAction(p, String.format("&eTeleporting back."));
-			p.setLocation(u.getBackLocation(p));
-			u.setBackLocation(current, p);
+			msg.sendAction(String.format("&eTeleporting back."));
+			p.setLocation(u.getBackLocation());
+			u.setBackLocation(current);
 			return u.success;
 		}
 		
-		msg.sendAction(p, String.format("&eNo previous locations found."));
+		msg.sendAction(String.format("&eNo previous locations found."));
         return u.success;
     }
     

@@ -11,15 +11,21 @@ import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 
 public class Utils {
 
+	Player p;
+	
+	public Utils(Player p) {
+		this.p = p;
+	}
+	
 	public CommandResult success = CommandResult.success();
 	
 	CommentedConfigurationNode backConfig = BackStorage.getConfig();
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Location getBackLocation(Player p) {
+	public Location getBackLocation() {
 		String uuid = p.getIdentifier();
 		
-		World world = Sponge.getServer().getWorld(backConfig.getNode(uuid, "world").getString()).get();
+		World world = getWorld(backConfig.getNode(uuid, "world").getString());
 
 		int x = backConfig.getNode(uuid, "x").getInt();
 		int y = backConfig.getNode(uuid, "y").getInt();
@@ -32,7 +38,7 @@ public class Utils {
     }
 	
 	@SuppressWarnings("rawtypes")
-	public void setBackLocation(Location loc, Player p) {
+	public void setBackLocation(Location loc) {
 		String uuid = p.getIdentifier();
 		
 		backConfig.getNode(uuid, "world").setValue(p.getWorld().getName());
@@ -43,5 +49,9 @@ public class Utils {
 		BackStorage.save();
     	
     }
+	
+	public World getWorld(String name) {
+		return Sponge.getServer().getWorld(name).get();
+	}
 	
 }

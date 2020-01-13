@@ -21,7 +21,7 @@ import org.spongepowered.api.world.World;
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 
-public class RandomTeleport implements CommandCallable {
+public class TeleportPosition implements CommandCallable {
 
 	private final Optional<Text> desc = Optional.of(Text.of("Teleports layer to random location."));
     private final Optional<Text> help = Optional.of(Text.of("Get teleports anywhere in between 0 - 5000 +- x,z"));
@@ -34,28 +34,38 @@ public class RandomTeleport implements CommandCallable {
     	Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
-		Random rand = new Random();
 		
 		if(!(source instanceof Player)) {
 			return u.success;
 		}
 		
-		int x = rand.nextInt(5000);
-		int z = rand.nextInt(5000);
-		int y = 0;
-
-		for(int i=255;i>1;i--) {
-			if(new Location(p.getWorld(),x,i,z).getBlock().getType()!=BlockTypes.AIR) {
-				y=i+2;
-				break;
-			}
-		}
-
-		Location loc = new Location(p.getWorld(), x, y, z);
+		String[] args = arguments.split(" ");
 		
-		u.setBackLocation(p.getLocation());
-		p.setLocation(loc);
-		msg.sendAction(String.format("&eTeleporting to: &f%d %d %d", x,y,z));
+		if(!(args.length == 0)) {
+			int x = Integer.parseInt(args[0]);
+			int y = Integer.parseInt(args[1]);
+			int z = Integer.parseInt(args[2]);
+
+			Location loc = new Location(p.getWorld(), x, y, z);
+			
+			PotionEffect potion = PotionEffect.builder()
+			        .potionType(PotionEffectTypes.RESISTANCE)
+			        .duration(200)
+			        .amplifier(4)
+			        .build();
+			
+			PotionEffectData effects = p.getOrCreate(PotionEffectData.class).get();
+			effects.addElement(potion);
+			
+			p.offer(effects);
+			
+			u.setBackLocation(p.getLocation());
+			p.setLocation(loc);
+			msg.sendAction(String.format("&eTeleporting to: &f%d %d %d", x,y,z));
+		} else {
+			msg.sendAction("&cPlease provide arguments! &fx&c,&fy&c,&fz&c.");
+		}
+		
         return u.success;
     }
 

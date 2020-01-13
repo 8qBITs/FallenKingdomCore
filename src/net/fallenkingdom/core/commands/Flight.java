@@ -19,28 +19,29 @@ import net.fallenkingdom.core.util.Utils;
 
 public class Flight implements CommandCallable {
 
-	Utils u = new Utils();
-	Messenger msg = new Messenger();
-	
 	private final Optional<Text> desc = Optional.of(Text.of("Toggles flight."));
     private final Optional<Text> help = Optional.of(Text.of("Toggles flight."));
     private final Text usage = Text.of("/fly");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
+		
+		Player p = (Player) source;
+		Utils u = new Utils(p);
+		Messenger msg = new Messenger(p);
+		
 		if(!(source instanceof Player)) {
 			return u.success;
 		}
 		
-		Player p = (Player) source;
 
 		if(p.get(Keys.CAN_FLY).get() == false) {
 			p.offer(Keys.CAN_FLY, true);
-			msg.sendAction(p, "&eFlight enabled.");
+			msg.sendAction("&eFlight enabled.");
 		} else {
 			p.offer(Keys.CAN_FLY, false);
 			p.offer(Keys.IS_FLYING, false);
-			msg.sendAction(p, "&eFlight disabled.");
+			msg.sendAction("&eFlight disabled.");
 		}
 
         return u.success;

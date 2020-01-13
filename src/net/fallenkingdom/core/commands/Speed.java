@@ -19,20 +19,21 @@ import net.fallenkingdom.core.util.Utils;
 
 public class Speed implements CommandCallable {
 
-	Utils u = new Utils();
-	Messenger msg = new Messenger();
-	
 	private final Optional<Text> desc = Optional.of(Text.of("Toggles flight and walk speed."));
     private final Optional<Text> help = Optional.of(Text.of("Toggles flight and walk speed."));
     private final Text usage = Text.of("/speed");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
+		
+		Player p = (Player) source;
+		Utils u = new Utils(p);
+		Messenger msg = new Messenger(p);
+		
 		if(!(source instanceof Player)) {
 			return u.success;
 		}
 		
-		Player p = (Player) source;
 		String[] args = arguments.split(" ");
 		// stuff
 		
@@ -43,35 +44,30 @@ public class Speed implements CommandCallable {
 		
 		if(!(args.length == 0)) {	
 			if(args[0].equals("fly")) {
-				if(!(args[1].contentEquals(null))) {
-					double SpeedDouble = Double.parseDouble(args[1]);
-					
-					float speed = (float) SpeedDouble;
-				    if(speed > 10 || speed < -1) {
-				        msg.sendAction(p, "&cYou have specified an argument out of range!");
-				    } else {
-				    	p.offer(Keys.FLYING_SPEED, Double.valueOf(0.05D * speed)).isSuccessful();
-				    	msg.sendAction(p, "&eYour flight speed has been updated.");
-				    }
-				} else {
-					msg.sendAction(p, "&cPlease provide a value &f0-10&c.");
-				}
+				double SpeedDouble = Double.parseDouble(args[1]);
+				
+				float speed = (float) SpeedDouble;
+			    if(speed > 10 || speed < -1) {
+			        msg.sendAction("&cYou have specified an argument out of range!");
+			    } else {
+			    	p.offer(Keys.FLYING_SPEED, Double.valueOf(0.05D * speed)).isSuccessful();
+			    	msg.sendAction("&eYour flight speed has been updated.");
+			    }
 				
 			} else if(args[0].equals("walk")) {
 
 				double SpeedDouble = Double.parseDouble(args[1]);
 				
-				
 				float speed = (float) SpeedDouble;
 			    if(speed > 10 || speed < -1) {
-			        msg.sendAction(p, "&cYou have specified an argument out of range!");
+			        msg.sendAction("&cYou have specified an argument out of range!");
 			    } else {
 			    	p.offer(Keys.WALKING_SPEED, Double.valueOf(0.05D * speed)).isSuccessful();
-			    	msg.sendAction(p, "&eYour walking speed has been updated.");
+			    	msg.sendAction("&eYour walking speed has been updated.");
 			    }
 				
 			} else {
-				msg.sendAction(p, "&cAvailable arguments: &ffly&c, &fwalk&c.");
+				msg.sendAction("&cAvailable arguments: &ffly&c, &fwalk&c.");
 			}
 			 
 		} 

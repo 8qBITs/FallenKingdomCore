@@ -18,6 +18,7 @@ import net.fallenkingdom.core.commands.Flight;
 import net.fallenkingdom.core.commands.GameMode;
 import net.fallenkingdom.core.commands.RandomTeleport;
 import net.fallenkingdom.core.commands.Speed;
+import net.fallenkingdom.core.commands.TeleportPosition;
 import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
@@ -69,6 +70,7 @@ public class Main {
     	cmdService.register(me, new GameMode(), "gamemode", "gm");
     	cmdService.register(me, new Flight(), "fly", "flight");
     	cmdService.register(me, new Speed(), "speed");
+    	cmdService.register(me, new TeleportPosition(), "tppos");
     }
     
     private void registerEvents() {

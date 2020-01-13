@@ -20,20 +20,21 @@ import net.fallenkingdom.core.util.Utils;
 
 public class GameMode implements CommandCallable {
 
-	Utils u = new Utils();
-	Messenger msg = new Messenger();
-	
 	private final Optional<Text> desc = Optional.of(Text.of("Changes your Gamemode."));
     private final Optional<Text> help = Optional.of(Text.of("Change your gamemode."));
     private final Text usage = Text.of("/gamemode");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
+		
+		Player p = (Player) source;
+		Utils u = new Utils(p);
+		Messenger msg = new Messenger(p);
+		
 		if(!(source instanceof Player)) {
 			return u.success;
 		}
 		
-		Player p = (Player) source;
 		String[] args = arguments.split(" ");
 		// stuff
 		
@@ -41,41 +42,41 @@ public class GameMode implements CommandCallable {
 			switch(args[0]) {
 			  case "0":
 				 p.offer(Keys.GAME_MODE, GameModes.SURVIVAL);
-				  msg.sendAction(p, "&eGamemode set to &fSURVIVAL");
+				  msg.sendAction("&eGamemode set to &fSURVIVAL");
 			    break;
 			  case "survival":
 				 p.offer(Keys.GAME_MODE, GameModes.SURVIVAL);
-				  msg.sendAction(p, "&eGamemode set to &fSURVIVAL");
+				  msg.sendAction("&eGamemode set to &fSURVIVAL");
 				  break;
 			  case "1":
 				 p.offer(Keys.GAME_MODE, GameModes.CREATIVE);
-				  msg.sendAction(p, "&eGamemode set to &fCREATIVE");
+				  msg.sendAction("&eGamemode set to &fCREATIVE");
 			    break;
 			  case "creative":
 				 p.offer(Keys.GAME_MODE, GameModes.CREATIVE);
-				  msg.sendAction(p, "&eGamemode set to &fCREATIVE");
+				  msg.sendAction("&eGamemode set to &fCREATIVE");
 			    break;
 			  case "2":
 				 p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
-				  msg.sendAction(p, "&eGamemode set to &fADVENTURE");
+				  msg.sendAction("&eGamemode set to &fADVENTURE");
 			    break;
 			  case "adventure":
 				 p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
-				  msg.sendAction(p, "&eGamemode set to &fADVENTURE");
+				  msg.sendAction("&eGamemode set to &fADVENTURE");
 			    break;
 			  case "3":
 				 p.offer(Keys.GAME_MODE, GameModes.SPECTATOR);
-				  msg.sendAction(p, "&eGamemode set to &fSPECTATOR");
+				  msg.sendAction("&eGamemode set to &fSPECTATOR");
 			    break;
 			  case "spectator":
 				 p.offer(Keys.GAME_MODE, GameModes.SPECTATOR);
-				  msg.sendAction(p, "&eGamemode set to &fSPECTATOR");
+				  msg.sendAction("&eGamemode set to &fSPECTATOR");
 			    break;
 			  default:
-			    msg.sendAction(p, "&cSorry, this gamemode does not exist.");
+			    msg.sendAction("&cSorry, this gamemode does not exist.");
 			}
 		} else {
-			msg.sendAction(p, "&cPlease provide a gamemode.");
+			msg.sendAction("&cPlease provide a gamemode.");
 		}
 
         return u.success;

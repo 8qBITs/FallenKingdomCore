@@ -14,7 +14,10 @@ import org.spongepowered.api.plugin.Plugin;
 import com.google.inject.Inject;
 
 import net.fallenkingdom.core.commands.Back;
+import net.fallenkingdom.core.commands.Flight;
+import net.fallenkingdom.core.commands.GameMode;
 import net.fallenkingdom.core.commands.RandomTeleport;
+import net.fallenkingdom.core.commands.Speed;
 import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
@@ -63,6 +66,9 @@ public class Main {
     	CommandManager cmdService = Sponge.getCommandManager();
     	cmdService.register(me, new RandomTeleport(), "rtp");
     	cmdService.register(me, new Back(), "back");
+    	cmdService.register(me, new GameMode(), "gamemode", "gm");
+    	cmdService.register(me, new Flight(), "fly", "flight");
+    	cmdService.register(me, new Speed(), "speed");
     }
     
     private void registerEvents() {

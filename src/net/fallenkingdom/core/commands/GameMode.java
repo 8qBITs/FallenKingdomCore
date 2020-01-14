@@ -42,46 +42,25 @@ public class GameMode implements CommandCallable {
 		
 		String[] args = arguments.split(" ");
 
-		if(!(args.length == 0)) {
-			switch(args[0]) {
-			  case "0":
-				 p.offer(Keys.GAME_MODE, GameModes.SURVIVAL);
-				  msg.sendAction("&eGamemode set to &fSURVIVAL");
-			    break;
-			  case "survival":
-				 p.offer(Keys.GAME_MODE, GameModes.SURVIVAL);
-				  msg.sendAction("&eGamemode set to &fSURVIVAL");
-				  break;
-			  case "1":
-				 p.offer(Keys.GAME_MODE, GameModes.CREATIVE);
-				  msg.sendAction("&eGamemode set to &fCREATIVE");
-			    break;
-			  case "creative":
-				 p.offer(Keys.GAME_MODE, GameModes.CREATIVE);
-				  msg.sendAction("&eGamemode set to &fCREATIVE");
-			    break;
-			  case "2":
-				 p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
-				  msg.sendAction("&eGamemode set to &fADVENTURE");
-			    break;
-			  case "adventure":
-				 p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
-				  msg.sendAction("&eGamemode set to &fADVENTURE");
-			    break;
-			  case "3":
-				 p.offer(Keys.GAME_MODE, GameModes.SPECTATOR);
-				  msg.sendAction("&eGamemode set to &fSPECTATOR");
-			    break;
-			  case "spectator":
-				 p.offer(Keys.GAME_MODE, GameModes.SPECTATOR);
-				  msg.sendAction("&eGamemode set to &fSPECTATOR");
-			    break;
-			  default:
-			    msg.sendAction("&cSorry, this gamemode does not exist.");
-			}
-		} else {
-			msg.sendAction("&cPlease provide a gamemode.");
-		}
+		if(args.length!=0) {
+            if(args[0]=="0" || args[0]=="survival" || args[0]=="s") {
+                p.offer(Keys.GAME_MODE, GameModes.SURVIVAL);
+                msg.sendAction("&eGamemode set to &fSURVIVAL");
+            } else if(args[0]=="1" || args[0]=="creative" || args[0]=="c") {
+                p.offer(Keys.GAME_MODE, GameModes.CREATIVE);
+                msg.sendAction("&eGamemode set to &fCREATIVE");
+            } else if(args[0]=="2" || args[0]=="adventure" || args[0]=="a") {
+                p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
+                msg.sendAction("&eGamemode set to &fADVENTURE");
+            } else if(args[0]=="3" || args[0]=="spectator" || args[0]=="sp") {
+                p.offer(Keys.GAME_MODE, GameModes.SPECTATOR);
+                msg.sendAction("&eGamemode set to &fSPECTATOR");
+            } else {
+                msg.sendAction("&cSorry, this gamemode does not exist.");
+            }
+        } else {
+            msg.sendAction("&cPlease provide a gamemode.");
+        }
 
         return u.success;
     }

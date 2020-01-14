@@ -3,10 +3,17 @@ package net.fallenkingdom.core.util.config;
 import java.io.File;
 import java.io.IOException;
 
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
+
+import com.google.common.reflect.TypeToken;
+
 import net.fallenkingdom.core.Main;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 
 public class HomeStorage {
 
@@ -56,6 +63,35 @@ public class HomeStorage {
 	
 	public static CommentedConfigurationNode getConfig() {
 		return config;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Location<World> getLocation(String uuid, String home) {
+		try {
+			return config.getNode(uuid,home).getValue(TypeToken.of(Location.class));
+		} catch (ObjectMappingException e) {
+			System.out.println("Bad bad with getting home config!");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static void saveLocation(String uuid, String home, Location<World> loc) {
+		try {
+			if(loc==null) {
+				config.getNode(uuid).removeChild(home);
+			} else {
+				config.getNode(uuid,home).setValue(TypeToken.of(Location.class), loc);
+			}
+			save();
+		} catch (ObjectMappingException e) {
+			e.printStackTrace();
+			System.out.println("Bad bad with setting home config!");
+		}
+	}
+	
+	public static int getCountHomes(String uuid) {
+		return config.getNode(uuid).getChildrenList().size();
 	}
 	
 }

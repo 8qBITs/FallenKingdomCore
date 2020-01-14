@@ -17,7 +17,9 @@ import com.flowpowered.math.vector.Vector3i;
 import com.google.inject.Inject;
 
 import net.fallenkingdom.core.chunk.ChunkHolder;
+import net.fallenkingdom.core.chunk.ChunkLoaderThread;
 import net.fallenkingdom.core.commands.Back;
+import net.fallenkingdom.core.commands.ChunkLoaderCommand;
 import net.fallenkingdom.core.commands.Flight;
 import net.fallenkingdom.core.commands.GameMode;
 import net.fallenkingdom.core.commands.RandomTeleport;
@@ -32,7 +34,7 @@ import net.fallenkingdom.core.util.config.MainConfig;
 public class Main {
 	
 	static Main me;
-	public static ArrayList<ChunkHolder> ChunkHolders = new ArrayList<ChunkHolder>();
+	public ArrayList<ChunkHolder> ChunkHolders = new ArrayList<ChunkHolder>();
 	//public static ArrayList<Chunk> ChunkLoadList = new ArrayList<Chunk>();
 	
 	@Inject
@@ -44,6 +46,7 @@ public class Main {
 
 	@Listener
 	public void onPreInit(GamePreInitializationEvent e) {
+		me = this;
 		
 		// Load databases
 		
@@ -56,15 +59,24 @@ public class Main {
 		
 		// Register stuff
 		
-		registerCommands();
-		registerEvents();
+		try {
+			registerCommands();
+			registerEvents();
+		} catch(Exception e1) {
+			this.getLogger().error(e1.toString());
+		}
 	}
 
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
-    	me = this;
     	
         logger.info("Is now fully loaded.");
+        
+        try {
+        	ChunkLoaderThread clt = new ChunkLoaderThread(true);
+		} catch(Exception e1) {
+			getLogger().error(e1.toString());
+		}
         
 
     }
@@ -77,22 +89,23 @@ public class Main {
     	cmdService.register(me, new Flight(), "fly", "flight");
     	cmdService.register(me, new Speed(), "speed");
     	cmdService.register(me, new TeleportPosition(), "tppos");
+    	cmdService.register(me, new ChunkLoaderCommand(), "chunkloader");
     }
     
     private void registerEvents() {
     	Sponge.getEventManager().registerListeners(me, new PlayerJoinEvent());
     }
     
-    public static Object getMain() {
+    public static Main getMain() {
 		return me;
 	}
     
-    public static Logger getLogger()
+    public Logger getLogger()
 	{
 		return me.logger;
 	}
     
-    public static ChunkHolder isPartOfChunkLoaderCollection(Chunk chunk) {
+    public ChunkHolder isPartOfChunkLoaderCollection(Chunk chunk) {
 	    for (ChunkHolder chunkHolder : ChunkHolders) {
 	      if (chunkHolder.isSameChunk(chunk))
 	        return chunkHolder; 

@@ -17,12 +17,14 @@ import org.spongepowered.api.world.World;
 
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+import net.fallenkingdom.core.chunk.ChunkLoader;
 
-public class ChunkLoader implements CommandCallable {
+public class ChunkLoaderCommand implements CommandCallable {
 
-	private final Optional<Text> desc = Optional.of(Text.of("dadasd."));
-    private final Optional<Text> help = Optional.of(Text.of("asdasd"));
-    private final Text usage = Text.of("/gamemode");
+	private final Optional<Text> desc = Optional.of(Text.of("Used to load chunks."));
+    private final Optional<Text> help = Optional.of(Text.of("Load chunks"));
+    private final Text usage = Text.of("/chunkloader");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -30,6 +32,7 @@ public class ChunkLoader implements CommandCallable {
 		Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
+		ChunkLoader cl = new ChunkLoader();
 		
 		if(!(source instanceof Player)) {
 			return u.success;
@@ -44,14 +47,30 @@ public class ChunkLoader implements CommandCallable {
 
 		if(!(args.length == 0)) {
 			switch(args[0]) {
-			  case "0":
-				 //stuff
+			  case "load":
+				 try {
+					cl.setNewChunk(p);
+				} catch (ObjectMappingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    break;
+			  case "unload":
+				  try {
+					cl.removeChunk(p);
+				} catch (ObjectMappingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    break;
+			  case "info":
+				 cl.infoChunk(p);
 			    break;
 			  default:
 			    msg.sendAction("&cCommand not found.");
 			}
 		} else {
-			msg.sendAction("&cPlease provide arguments, LOAD,UNLOAD,INFO.");
+			msg.sendAction("&cPlease provide arguments, <load/unload/info>");
 		}
 
         return u.success;

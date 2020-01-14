@@ -27,13 +27,13 @@ public class ChunkLoaderThread {
 	  
 	  public void loadChunks() {
 		  try {
-  	        for (ChunkHolder chunkHolder : Main.ChunkHolders) {
+  	        for (ChunkHolder chunkHolder : Main.getMain().ChunkHolders) {
   	          if (chunkHolder.keepLoaded) {
   	            Chunk chunk = chunkHolder.getChunk();
   	            if (!chunk.isLoaded()) {
   	              boolean load = chunk.loadChunk(true);
   	              if (!load)
-  	                Main.getLogger().error("Failed to load Chunk: " + chunk.toString()); 
+  	                Main.getMain().getLogger().error("Failed to load Chunk: " + chunk.toString()); 
   	            } 
   	          } 
   	        } 

@@ -35,7 +35,7 @@ public class BackStorage {
 		}
 		catch (IOException e)
 		{
-			Main.getLogger().info("An IO Exception accured.");
+			Main.getMain().getLogger().info("An IO Exception accured.");
 			e.printStackTrace();
 			return;
 		}
@@ -50,7 +50,7 @@ public class BackStorage {
 		}
 		catch (IOException e)
 		{
-			Main.getLogger().info("An IO Exception accured.");
+			Main.getMain().getLogger().info("An IO Exception accured.");
 		}
 	}
 	

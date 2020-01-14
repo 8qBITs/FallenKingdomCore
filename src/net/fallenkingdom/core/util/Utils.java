@@ -9,8 +9,11 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
+import com.google.common.reflect.TypeToken;
+
 import net.fallenkingdom.core.util.config.BackStorage;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 
 public class Utils {
 
@@ -24,31 +27,29 @@ public class Utils {
 	
 	CommentedConfigurationNode backConfig = BackStorage.getConfig();
 	 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	public Location getBackLocation() {
 		String uuid = p.getIdentifier();
 		
-		World world = getWorld(backConfig.getNode(uuid, "world").getString());
-
-		int x = backConfig.getNode(uuid, "x").getInt();
-		int y = backConfig.getNode(uuid, "y").getInt();
-		int z= backConfig.getNode(uuid, "z").getInt();
-		
-		Location loc = new Location(world, x, y, z);
-		
-		return loc;
+		try {
+			return backConfig.getNode(p.getIdentifier()).getValue(TypeToken.of(Location.class));
+		} catch (ObjectMappingException e) {
+			System.out.println("Bad bad with util getting back location");
+			e.printStackTrace();
+			return null;
+		}
     	
     }
 	
 	@SuppressWarnings("rawtypes")
 	public void setBackLocation(Location loc) {
 		String uuid = p.getIdentifier();
-		
-		backConfig.getNode(uuid, "world").setValue(p.getWorld().getName());
-		backConfig.getNode(uuid, "x").setValue(loc.getX());
-		backConfig.getNode(uuid, "y").setValue(loc.getY());
-		backConfig.getNode(uuid, "z").setValue(loc.getZ());
-		
+		try {
+			backConfig.getNode(uuid).setValue(TypeToken.of(Location.class), p.getLocation());
+		} catch (ObjectMappingException e) {
+			System.out.println("Bad bad with util saving back location");
+			e.printStackTrace();
+		}
 		BackStorage.save();
     	
     }

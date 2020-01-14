@@ -17,11 +17,11 @@ import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 import net.fallenkingdom.core.util.config.HomeStorage;
 
-public class Home implements CommandCallable {
+public class DelHome implements CommandCallable {
 
-	private final Optional<Text> desc = Optional.of(Text.of("Teleports you home."));
-    private final Optional<Text> help = Optional.of(Text.of("Teleports you home."));
-    private final Text usage = Text.of("/home [name]");
+	private final Optional<Text> desc = Optional.of(Text.of("Deletes your home."));
+    private final Optional<Text> help = Optional.of(Text.of("Deletes your home."));
+    private final Text usage = Text.of("/delhome [name]");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -29,7 +29,6 @@ public class Home implements CommandCallable {
 		Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
-		
 		if(!(source instanceof Player)) {
 			return u.success;
 		}
@@ -43,10 +42,11 @@ public class Home implements CommandCallable {
 
 		args[0] = args.length!=0 ? args[0].toLowerCase() : "home";
 		
-		Location<World> hl;
-		if((hl = HomeStorage.getLocation(p.getIdentifier(), args[0])) != null) {
-			u.setBackLocation(p.getLocation());
-			p.setLocation(hl);
+		String identifier = p.getIdentifier();
+		
+		if(HomeStorage.getConfig().getNode(identifier, args[0])!=null) {
+			HomeStorage.saveLocation(identifier, args[0], null);
+			msg.sendAction("&fHome '"+args[0]+"' deleted");	
 		} else {
 			msg.sendSubTitle("&cHome '"+args[0]+"' doesn't exist!");
 		}
@@ -81,7 +81,7 @@ public class Home implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.home");
+		return source.hasPermission("core.delhome");
 	}
 
 }

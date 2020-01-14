@@ -23,7 +23,7 @@ public class Utils {
 	public CommandResult success = CommandResult.success();
 	
 	CommentedConfigurationNode backConfig = BackStorage.getConfig();
-	
+	 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Location getBackLocation() {
 		String uuid = p.getIdentifier();

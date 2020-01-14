@@ -1,6 +1,5 @@
 package net.fallenkingdom.core.commands;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -9,27 +8,26 @@ import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
-import net.fallenkingdom.core.Main;
-import net.fallenkingdom.core.chunk.ChunkHolder;
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 
-public class Back implements CommandCallable {
+public class ChunkLoader implements CommandCallable {
+
+	private final Optional<Text> desc = Optional.of(Text.of("dadasd."));
+    private final Optional<Text> help = Optional.of(Text.of("asdasd"));
+    private final Text usage = Text.of("/gamemode");
 	
-	private final Optional<Text> desc = Optional.of(Text.of("Teleports you to previous location."));
-    private final Optional<Text> help = Optional.of(Text.of("Get teleported to your previous location."));
-    private final Text usage = Text.of("/back");
-	
-    @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
-    	
-    	Player p = (Player) source;
+		
+		Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
 		
@@ -42,15 +40,20 @@ public class Back implements CommandCallable {
 			return u.success;
 		}
 		
-		if(u.getBackLocation() != null) {
-			Location current = p.getLocation();
-			msg.sendAction(String.format("&eTeleporting back."));
-			p.setLocation(u.getBackLocation());
-			u.setBackLocation(current);
-			return u.success;
+		String[] args = arguments.split(" ");
+
+		if(!(args.length == 0)) {
+			switch(args[0]) {
+			  case "0":
+				 //stuff
+			    break;
+			  default:
+			    msg.sendAction("&cCommand not found.");
+			}
+		} else {
+			msg.sendAction("&cPlease provide arguments, LOAD,UNLOAD,INFO.");
 		}
-		
-		msg.sendAction(String.format("&eNo previous locations found."));
+
         return u.success;
     }
     
@@ -81,7 +84,7 @@ public class Back implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.back");
+		return source.hasPermission("core.chunkload");
 	}
 
 }

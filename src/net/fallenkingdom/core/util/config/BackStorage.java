@@ -26,7 +26,6 @@ public class BackStorage {
 		{
 			if (!configFile.exists())
 			{
-				configFile.getParentFile().mkdirs();
 				configFile.createNewFile();
 				config = configManager.load();
 				configManager.save(config);

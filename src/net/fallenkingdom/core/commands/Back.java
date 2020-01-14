@@ -15,7 +15,6 @@ import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 import net.fallenkingdom.core.Main;
-import net.fallenkingdom.core.chunk.ChunkHolder;
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 

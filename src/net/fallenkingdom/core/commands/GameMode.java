@@ -42,17 +42,17 @@ public class GameMode implements CommandCallable {
 		
 		String[] args = arguments.split(" ");
 
-		if(args.length!=0) {
-            if(args[0]=="0" || args[0]=="survival" || args[0]=="s") {
+		if(args.length!=0 && args[0]!="") {
+            if(args[0].equalsIgnoreCase("0") || args[0].equalsIgnoreCase("survival") || args[0].equalsIgnoreCase("s")) {
                 p.offer(Keys.GAME_MODE, GameModes.SURVIVAL);
                 msg.sendAction("&eGamemode set to &fSURVIVAL");
-            } else if(args[0]=="1" || args[0]=="creative" || args[0]=="c") {
+            } else if(args[0].equalsIgnoreCase("1") || args[0].equalsIgnoreCase("creative") || args[0].equalsIgnoreCase("c")) {
                 p.offer(Keys.GAME_MODE, GameModes.CREATIVE);
                 msg.sendAction("&eGamemode set to &fCREATIVE");
-            } else if(args[0]=="2" || args[0]=="adventure" || args[0]=="a") {
+            } else if(args[0].equalsIgnoreCase("2") || args[0].equalsIgnoreCase("adventure") || args[0].equalsIgnoreCase("a")) {
                 p.offer(Keys.GAME_MODE, GameModes.ADVENTURE);
                 msg.sendAction("&eGamemode set to &fADVENTURE");
-            } else if(args[0]=="3" || args[0]=="spectator" || args[0]=="sp") {
+            } else if(args[0].equalsIgnoreCase("3") || args[0].equalsIgnoreCase("spectator") || args[0].equalsIgnoreCase("sp")) {
                 p.offer(Keys.GAME_MODE, GameModes.SPECTATOR);
                 msg.sendAction("&eGamemode set to &fSPECTATOR");
             } else {

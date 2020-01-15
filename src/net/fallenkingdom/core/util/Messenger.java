@@ -14,7 +14,7 @@ public class Messenger {
 	}
 	
 	// Make things accept color formatting
-	private Text iCanHasColor(String input) {
+	public static Text iCanHasColor(String input) {
 		return Text.of(TextSerializers.FORMATTING_CODE.deserialize(input));
 	}
 	

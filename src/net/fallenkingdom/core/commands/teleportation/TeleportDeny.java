@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -18,11 +17,11 @@ import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.TPAManager;
 import net.fallenkingdom.core.util.Utils;
 
-public class Teleport implements CommandCallable {
+public class TeleportDeny implements CommandCallable {
 
-	private final Optional<Text> desc = Optional.of(Text.of("Requests teleport to another player."));
-    private final Optional<Text> help = Optional.of(Text.of("Requests teleport to another player."));
-    private final Text usage = Text.of("/tpa <name>");
+	private final Optional<Text> desc = Optional.of(Text.of("Denies another players teleport request."));
+    private final Optional<Text> help = Optional.of(Text.of("Denies another players teleport request."));
+    private final Text usage = Text.of("/tpdeny");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -40,23 +39,7 @@ public class Teleport implements CommandCallable {
 			return u.success;
 		}
 		
-		String[] args = arguments.split(" ");
-
-		if(args.length==0 || args[0]=="") {
-			msg.sendSubTitle("&cPlease provide a player name");
-		} else {
-			Optional<Player> target = Sponge.getServer().getPlayer(args[0]);
-			System.out.println(target!=null);
-			System.out.println(target.isPresent());
-			System.out.println(target.get().getName());
-			System.out.println(target.get());
-			if(target!=null && target.isPresent()) {
-				TPAManager.RequestTpa(p, target.get());
-			} else {
-				msg.sendSubTitle("&cPlayer not found");
-			}
-			
-		}
+		TPAManager.DenyTpa(p);
 
         return u.success;
     }
@@ -88,7 +71,7 @@ public class Teleport implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.tpa");
+		return source.hasPermission("core.tpdeny");
 	}
 
 }

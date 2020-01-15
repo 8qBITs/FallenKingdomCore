@@ -42,14 +42,14 @@ public class SetHome implements CommandCallable {
 		
 		String[] args = arguments.split(" ");
 
-		args[0] = args.length!=0 ? args[0].toLowerCase() : "home";
+		String home = args.length!=0 && !args[0].equals("") ? args[0].toLowerCase() : "home";
 		
 		String identifier = p.getIdentifier();
 		if(HomeStorage.getCountHomes(identifier)>=max_homes) {
 			msg.sendSubTitle("&cYou cannot set more homes");
 		} else {
-			HomeStorage.saveLocation(identifier, args[0], p.getLocation());
-			msg.sendAction("&fHome '"+args[0]+"' set");
+			HomeStorage.saveLocation(identifier, home, p.getLocation());
+			msg.sendAction("&fHome '"+home+"' set");
 		}
 
         return u.success;

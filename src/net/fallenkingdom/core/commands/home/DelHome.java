@@ -40,15 +40,15 @@ public class DelHome implements CommandCallable {
 		
 		String[] args = arguments.split(" ");
 
-		args[0] = args.length!=0 ? args[0].toLowerCase() : "home";
+		String home = args.length!=0 && !args[0].equals("") ? args[0].toLowerCase() : "home";
 		
 		String identifier = p.getIdentifier();
 		
-		if(HomeStorage.getConfig().getNode(identifier, args[0])!=null) {
-			HomeStorage.saveLocation(identifier, args[0], null);
-			msg.sendAction("&fHome '"+args[0]+"' deleted");	
+		if(HomeStorage.getConfig().getNode(identifier, home)!=null) {
+			HomeStorage.saveLocation(identifier, home, null);
+			msg.sendAction("&fHome '"+home+"' deleted");
 		} else {
-			msg.sendSubTitle("&cHome '"+args[0]+"' doesn't exist!");
+			msg.sendSubTitle("&cHome '"+home+"' doesn't exist!");
 		}
 
         return u.success;

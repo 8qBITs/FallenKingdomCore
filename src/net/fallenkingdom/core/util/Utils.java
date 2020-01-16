@@ -29,8 +29,6 @@ public class Utils {
 	 
 	@SuppressWarnings({ "rawtypes" })
 	public Location getBackLocation() {
-		String uuid = p.getIdentifier();
-		
 		try {
 			return backConfig.getNode(p.getIdentifier()).getValue(TypeToken.of(Location.class));
 		} catch (ObjectMappingException e) {

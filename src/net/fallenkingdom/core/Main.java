@@ -1,13 +1,7 @@
 package net.fallenkingdom.core;
 
 import java.io.File;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
@@ -16,28 +10,19 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
-
-import org.spongepowered.api.scheduler.Task;
-import org.spongepowered.api.text.Text;
-
 import com.google.inject.Inject;
 
-import net.fallenkingdom.core.commands.Back;
-import net.fallenkingdom.core.commands.Flight;
-import net.fallenkingdom.core.commands.GameMode;
-import net.fallenkingdom.core.commands.RandomTeleport;
-import net.fallenkingdom.core.commands.Speed;
-import net.fallenkingdom.core.commands.TeleportPosition;
-import net.fallenkingdom.core.commands.TestCommand;
 import net.fallenkingdom.core.commands.*;
 import net.fallenkingdom.core.commands.home.*;
+import net.fallenkingdom.core.commands.teleportation.*;
 import net.fallenkingdom.core.util.AutoRestart;
-
-import com.google.inject.Inject;
-
+import net.fallenkingdom.core.util.TPA;
+import net.fallenkingdom.core.util.TPAManager;
+import net.fallenkingdom.core.util.VanishManager;
 import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
+import net.fallenkingdom.core.util.config.WarpStorage;
 
 @Plugin(id = "fkcore", name = "FallenKingdomCore", version = "0.6", authors = "8qBIT, Elipse458")
 public class Main {
@@ -46,6 +31,7 @@ public class Main {
 	
 	@Inject
     private Logger logger;
+	public VanishManager vanishManager;
 	
 	@Inject
 	@DefaultConfig(sharedRoot = false)
@@ -55,6 +41,8 @@ public class Main {
 	public void onPreInit(GamePreInitializationEvent e) {
 		me = this;
 		
+		vanishManager = new VanishManager();
+		
 		// Load databases
 		
 		MainConfig.init(rootDir);
@@ -63,6 +51,9 @@ public class Main {
 		BackStorage.load();
 		HomeStorage.init(rootDir);
 		HomeStorage.load();
+		WarpStorage.init(rootDir);
+		WarpStorage.load();
+		TPAManager.awaiting = new ArrayList<TPA>();
 
 		// Register stuff
 		
@@ -94,6 +85,15 @@ public class Main {
     	cmdService.register(me, new Home(), "home");
     	cmdService.register(me, new SetHome(), "sethome");
     	cmdService.register(me, new DelHome(), "delhome");
+    	cmdService.register(me, new Teleport(), "tpa");
+    	cmdService.register(me, new TeleportHere(), "tpahere");
+    	cmdService.register(me, new TeleportAccept(), "tpaccept", "tpyes");
+    	cmdService.register(me, new TeleportDeny(), "tpdeny", "tpno");
+    	cmdService.register(me, new Warp(), "warp");
+    	cmdService.register(me, new SetWarp(), "setwarp");
+    	cmdService.register(me, new DelWarp(), "delwarp");
+    	cmdService.register(me, new Vanish(), "vanish", "v");
+    	
     }
     
     private void registerEvents() {

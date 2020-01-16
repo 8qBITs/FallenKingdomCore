@@ -41,14 +41,14 @@ public class Home implements CommandCallable {
 		
 		String[] args = arguments.split(" ");
 
-		args[0] = args.length!=0 ? args[0].toLowerCase() : "home";
+		String home = args.length!=0 && !args[0].equals("") ? args[0].toLowerCase() : "home";
 		
 		Location<World> hl;
-		if((hl = HomeStorage.getLocation(p.getIdentifier(), args[0])) != null) {
+		if((hl = HomeStorage.getLocation(p.getIdentifier(), home)) != null) {
 			u.setBackLocation(p.getLocation());
 			p.setLocation(hl);
 		} else {
-			msg.sendSubTitle("&cHome '"+args[0]+"' doesn't exist!");
+			msg.sendSubTitle("&cHome '"+home+"' doesn't exist!");
 		}
 
         return u.success;

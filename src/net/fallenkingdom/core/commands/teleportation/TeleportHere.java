@@ -1,9 +1,10 @@
-package net.fallenkingdom.core.commands.home;
+package net.fallenkingdom.core.commands.teleportation;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -14,14 +15,14 @@ import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 import net.fallenkingdom.core.util.Messenger;
+import net.fallenkingdom.core.util.TPAManager;
 import net.fallenkingdom.core.util.Utils;
-import net.fallenkingdom.core.util.config.HomeStorage;
 
-public class SetHome implements CommandCallable {
+public class TeleportHere implements CommandCallable {
 
-	private final Optional<Text> desc = Optional.of(Text.of("Sets your home."));
-    private final Optional<Text> help = Optional.of(Text.of("Sets your home."));
-    private final Text usage = Text.of("/sethome [name]");
+	private final Optional<Text> desc = Optional.of(Text.of("Requests another player to teleport to you."));
+    private final Optional<Text> help = Optional.of(Text.of("Requests another player to teleport to you."));
+    private final Text usage = Text.of("/tpahere <name>");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -29,7 +30,6 @@ public class SetHome implements CommandCallable {
 		Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
-		int max_homes = 3;
 		
 		if(!(source instanceof Player)) {
 			return u.success;
@@ -42,14 +42,13 @@ public class SetHome implements CommandCallable {
 		
 		String[] args = arguments.split(" ");
 
-		String home = args.length!=0 && !args[0].equals("") ? args[0].toLowerCase() : "home";
-		
-		String identifier = p.getIdentifier();
-		if(HomeStorage.getCountHomes(identifier)>=max_homes) {
-			msg.sendSubTitle("&cYou cannot set more homes");
+		if(args.length==0) {
+			msg.sendSubTitle("&cPlease provide a player name");
 		} else {
-			HomeStorage.saveLocation(identifier, home, p.getLocation());
-			msg.sendAction("&fHome '"+home+"' set");
+			Optional<Player> target;
+			if((target = Sponge.getServer().getPlayer(args[0])).isPresent()) {
+				TPAManager.RequestTpa(p, target.get(), true);
+			}
 		}
 
         return u.success;
@@ -82,7 +81,7 @@ public class SetHome implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.sethome");
+		return source.hasPermission("core.tpahere");
 	}
 
 }

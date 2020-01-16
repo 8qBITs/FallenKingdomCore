@@ -26,6 +26,10 @@ public class VanishManager {
 		}).interval(1, TimeUnit.SECONDS).submit(Main.getMain());
 	}
 	
+	public boolean IsVanished(Player p) {
+		return vanished.contains(p);
+	}
+	
 	public void ToggleVanish(Player p) {
 		boolean toggle = !vanished.contains(p);
 		if(toggle)

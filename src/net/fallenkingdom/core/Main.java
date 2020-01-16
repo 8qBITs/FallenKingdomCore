@@ -12,18 +12,13 @@ import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 import com.google.inject.Inject;
 
-import net.fallenkingdom.core.commands.Back;
-import net.fallenkingdom.core.commands.Flight;
-import net.fallenkingdom.core.commands.GameMode;
-import net.fallenkingdom.core.commands.RandomTeleport;
-import net.fallenkingdom.core.commands.Speed;
-import net.fallenkingdom.core.commands.TeleportPosition;
-import net.fallenkingdom.core.commands.TestCommand;
+import net.fallenkingdom.core.commands.*;
 import net.fallenkingdom.core.commands.home.*;
 import net.fallenkingdom.core.commands.teleportation.*;
 import net.fallenkingdom.core.util.AutoRestart;
 import net.fallenkingdom.core.util.TPA;
 import net.fallenkingdom.core.util.TPAManager;
+import net.fallenkingdom.core.util.VanishManager;
 import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
@@ -36,6 +31,7 @@ public class Main {
 	
 	@Inject
     private Logger logger;
+	public VanishManager vanishManager;
 	
 	@Inject
 	@DefaultConfig(sharedRoot = false)
@@ -44,6 +40,8 @@ public class Main {
 	@Listener
 	public void onPreInit(GamePreInitializationEvent e) {
 		me = this;
+		
+		vanishManager = new VanishManager();
 		
 		// Load databases
 		
@@ -94,6 +92,7 @@ public class Main {
     	cmdService.register(me, new Warp(), "warp");
     	cmdService.register(me, new SetWarp(), "setwarp");
     	cmdService.register(me, new DelWarp(), "delwarp");
+    	cmdService.register(me, new Vanish(), "vanish", "v");
     	
     }
     

@@ -27,6 +27,7 @@ import net.fallenkingdom.core.util.TPAManager;
 import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
+import net.fallenkingdom.core.util.config.WarpStorage;
 
 @Plugin(id = "fkcore", name = "FallenKingdomCore", version = "0.6", authors = "8qBIT, Elipse458")
 public class Main {
@@ -52,6 +53,8 @@ public class Main {
 		BackStorage.load();
 		HomeStorage.init(rootDir);
 		HomeStorage.load();
+		WarpStorage.init(rootDir);
+		WarpStorage.load();
 		TPAManager.awaiting = new ArrayList<TPA>();
 
 		// Register stuff
@@ -88,6 +91,10 @@ public class Main {
     	cmdService.register(me, new TeleportHere(), "tpahere");
     	cmdService.register(me, new TeleportAccept(), "tpaccept", "tpyes");
     	cmdService.register(me, new TeleportDeny(), "tpdeny", "tpno");
+    	cmdService.register(me, new Warp(), "warp");
+    	cmdService.register(me, new SetWarp(), "setwarp");
+    	cmdService.register(me, new DelWarp(), "delwarp");
+    	
     }
     
     private void registerEvents() {

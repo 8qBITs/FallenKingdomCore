@@ -45,7 +45,7 @@ public class SetHome implements CommandCallable {
 		String home = args.length!=0 && !args[0].equals("") ? args[0].toLowerCase() : "home";
 		
 		String identifier = p.getIdentifier();
-		if(HomeStorage.getCountHomes(identifier)>=max_homes) {
+		if(HomeStorage.getCountHomes(identifier) >= max_homes) {
 			msg.sendSubTitle("&cYou cannot set more homes");
 		} else {
 			HomeStorage.saveLocation(identifier, home, p.getLocation());

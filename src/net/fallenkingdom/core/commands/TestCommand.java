@@ -13,6 +13,7 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
+import net.fallenkingdom.core.util.AutoRestart;
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 
@@ -20,7 +21,7 @@ public class TestCommand implements CommandCallable {
 
 	private final Optional<Text> desc = Optional.of(Text.of("test."));
     private final Optional<Text> help = Optional.of(Text.of("twest"));
-    private final Text usage = Text.of("/speed");
+    private final Text usage = Text.of("/test");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -37,6 +38,10 @@ public class TestCommand implements CommandCallable {
 
 		
 		// shti to test
+		AutoRestart ar = new AutoRestart(false);
+		ar.StartRestartTimer();
+		
+		p.sendMessage(Text.of("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
 		
         return u.success;
     }
@@ -68,7 +73,7 @@ public class TestCommand implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.speed");
+		return source.hasPermission("core");
 	}
 
 }

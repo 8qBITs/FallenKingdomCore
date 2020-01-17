@@ -81,7 +81,7 @@ public class Home implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.home");
+		return source.hasPermission("core.home.home");
 	}
 
 }

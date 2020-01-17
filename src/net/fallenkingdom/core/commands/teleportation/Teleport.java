@@ -88,7 +88,7 @@ public class Teleport implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.tpa");
+		return source.hasPermission("core.admin.tp");
 	}
 
 }

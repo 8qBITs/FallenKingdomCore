@@ -104,7 +104,7 @@ public class Speed implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.speed");
+		return source.hasPermission("core.admin.speed");
 	}
 
 }

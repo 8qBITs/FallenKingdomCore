@@ -71,7 +71,7 @@ public class Vanish implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.vanish");
+		return source.hasPermission("core.admin.vanish");
 	}
 
 }

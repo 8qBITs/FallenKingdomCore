@@ -78,7 +78,7 @@ public class Flight implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.flight");
+		return source.hasPermission("core.admin.flight");
 	}
 
 }

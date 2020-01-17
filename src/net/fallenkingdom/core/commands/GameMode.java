@@ -92,7 +92,7 @@ public class GameMode implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.gamemode");
+		return source.hasPermission("core.admin.gamemode");
 	}
 
 }

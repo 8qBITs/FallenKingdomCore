@@ -81,7 +81,7 @@ public class DelHome implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.delhome");
+		return source.hasPermission("core.home.delhome");
 	}
 
 }

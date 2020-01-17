@@ -91,7 +91,8 @@ public class HomeStorage {
 	}
 	
 	public static int getCountHomes(String uuid) {
-		return config.getNode(uuid).getChildrenList().size();
+		// fucking list broken piece of fuck
+		return config.getNode(uuid).getChildrenMap().size();
 	}
 	
 }

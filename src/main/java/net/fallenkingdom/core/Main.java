@@ -89,7 +89,7 @@ public class Main {
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
     	
-        logger.info("Is now fully loaded.");
+        logger.info("The Core Is now fully loaded.");
     }
     
     private void registerCommands() {

@@ -1,0 +1,8 @@
+[
+    {
+        "modid": "fallenkingdomcore",
+        "name": "FallenKingdomCore",
+        "version": "1.0.0-SNAPSHOT",
+        "description": "Here lies an example plugin definition"
+    }
+]

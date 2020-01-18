@@ -6,7 +6,8 @@
       <item index="1" class="java.lang.String" itemvalue="org.spongepowered.api.plugin.Plugin" />
     </list>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/classes" />
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

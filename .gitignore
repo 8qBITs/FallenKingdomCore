@@ -1,6 +1,2 @@
-.project
-./bin
-./settings
-.classpath
-.FallenNetworkCore.iml
-./idea
+./.idea
+./build

@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'org.spongepowered.plugin' version '0.9.0'
+}
+
+// This may not be required, but has solved issues in the past
+compileJava.options.encoding = 'UTF-8'
+
+// TODO: Change the following to match your information
+group = 'net.fallenkingdom.core'
+version = '1.0.0-SNAPSHOT'
+description = 'Here lies an example plugin definition'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.spongepowered:spongeapi:7.1.0'
+    compile 'net.luckperms:api:5.0'
+    implementation("com.google.guava:guava:28.2-jre")
+}

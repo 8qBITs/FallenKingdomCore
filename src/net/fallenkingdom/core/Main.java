@@ -90,9 +90,6 @@ public class Main {
     public void onServerStart(GameStartedServerEvent event) {
     	
         logger.info("Is now fully loaded.");
-        logger.info("Auto restarter starting!!.");
-        AutoRestart ar = new AutoRestart(true);
-
     }
     
     private void registerCommands() {

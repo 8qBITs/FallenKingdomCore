@@ -6,23 +6,30 @@ import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
 import org.spongepowered.api.config.DefaultConfig;
+import org.spongepowered.api.event.EventManager;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
+
+import com.google.common.reflect.TypeToken;
 import com.google.inject.Inject;
 
 import net.fallenkingdom.core.commands.*;
 import net.fallenkingdom.core.commands.home.*;
+import net.fallenkingdom.core.commands.kit.*;
 import net.fallenkingdom.core.commands.teleportation.*;
+import net.fallenkingdom.core.events.VanishEvents;
 import net.fallenkingdom.core.util.AutoRestart;
 import net.fallenkingdom.core.util.TPA;
 import net.fallenkingdom.core.util.TPAManager;
 import net.fallenkingdom.core.util.VanishManager;
 import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
+import net.fallenkingdom.core.util.config.KitStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
 import net.fallenkingdom.core.util.config.WarpStorage;
+import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 
 @Plugin(id = "fkcore", name = "FallenKingdomCore", version = "0.6", authors = "8qBIT, Elipse458")
 public class Main {
@@ -53,6 +60,8 @@ public class Main {
 		HomeStorage.load();
 		WarpStorage.init(rootDir);
 		WarpStorage.load();
+		KitStorage.init(rootDir);
+		KitStorage.load();
 		TPAManager.awaiting = new ArrayList<TPA>();
 
 		// Register stuff
@@ -60,6 +69,7 @@ public class Main {
 		try {
 			registerCommands();
 			registerEvents();
+			TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(KitStorage.Kit.class), new KitStorage.KitSerializer());
 		} catch(Exception e1) {
 			this.getLogger().error(e1.toString());
 		}
@@ -94,11 +104,13 @@ public class Main {
     	cmdService.register(me, new SetWarp(), "setwarp");
     	cmdService.register(me, new DelWarp(), "delwarp");
     	cmdService.register(me, new Vanish(), "vanish", "v");
-    	
+    	cmdService.register(me, new Kit(), "kit");
+    	cmdService.register(me, new CreateKit(), "createkit");
     }
     
     private void registerEvents() {
-    	
+    	EventManager evtService = Sponge.getEventManager();
+    	evtService.registerListeners(me, new VanishEvents());
     }
     
     public static Main getMain() {

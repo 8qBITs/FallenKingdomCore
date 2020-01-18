@@ -58,9 +58,9 @@ public class Utils {
 	
 	////////////////// MATH RELATED UTILS ////////////////////////
 	
-	Pattern time_pattern = Pattern.compile("\\d+[hmsdyHMSDY]");
+	static final Pattern time_pattern = Pattern.compile("\\d+[hmsdyHMSDY]");
 	
-	public long parseTimeFromString(String t) {
+	static public long parseTimeFromString(String t) {
 		Matcher matcher = time_pattern.matcher(t);
 		long time = 0;
 		while(matcher.find()) {
@@ -82,7 +82,7 @@ public class Utils {
 		return time;
 	}
 	
-	public String parseTimeFormat(String t) {
+	static public String parseTimeFormat(String t) {
 		Matcher matcher = time_pattern.matcher(t);
 		String time_str = "";
 		while(matcher.find()) {
@@ -104,7 +104,7 @@ public class Utils {
 		return time_str;
 	}
 	
-	public String parseTimeFormat(long t) {
+	static public String parseTimeFormat(long t) {
 		int years,days,hours,minutes;
 		String time_str = "";
 		if((years = (int)Math.floor(t/31536000))>0)

@@ -2,6 +2,8 @@ package net.fallenkingdom.core;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
@@ -11,6 +13,7 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.service.ProviderRegistration;
 
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Inject;
@@ -29,6 +32,7 @@ import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.KitStorage;
 import net.fallenkingdom.core.util.config.MainConfig;
 import net.fallenkingdom.core.util.config.WarpStorage;
+import net.luckperms.api.LuckPerms;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 
 @Plugin(id = "fkcore", name = "FallenKingdomCore", version = "0.6", authors = "8qBIT, Elipse458")
@@ -39,6 +43,8 @@ public class Main {
 	@Inject
     private Logger logger;
 	public VanishManager vanishManager;
+	public LuckPerms LuckpermsApi;
+	
 	
 	@Inject
 	@DefaultConfig(sharedRoot = false)
@@ -72,6 +78,11 @@ public class Main {
 			TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(KitStorage.Kit.class), new KitStorage.KitSerializer());
 		} catch(Exception e1) {
 			this.getLogger().error(e1.toString());
+		}
+		
+		Optional<ProviderRegistration<LuckPerms>> provider = Sponge.getServiceManager().getRegistration(LuckPerms.class);
+		if (provider.isPresent()) {
+		    LuckpermsApi = provider.get().getProvider();
 		}
 	}
 
@@ -115,6 +126,7 @@ public class Main {
     private void registerEvents() {
     	EventManager evtService = Sponge.getEventManager();
     	evtService.registerListeners(me, new PlayerJoin());
+    	evtService.registerListeners(me, new Chat());
     	//evtService.registerListeners(me, new VanishEvents());
     }
     

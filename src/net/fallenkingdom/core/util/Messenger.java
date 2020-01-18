@@ -17,6 +17,9 @@ public class Messenger {
 	public static Text iCanHasColor(String input) {
 		return Text.of(TextSerializers.FORMATTING_CODE.deserialize(input));
 	}
+	public static Text iCanHasColor(Text input) {
+		return TextSerializers.FORMATTING_CODE.deserialize(input.toPlain());
+	}
 	
 	public void sendFullTitle(String title, String subtitle) {
 		Title build_title = Title.builder()

@@ -101,7 +101,7 @@ public class TeleportPosition implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.admin.tp");
+		return source.hasPermission("core.admin.tppos");
 	}
 
 }

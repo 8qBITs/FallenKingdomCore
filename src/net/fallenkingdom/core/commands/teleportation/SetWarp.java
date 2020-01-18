@@ -78,7 +78,7 @@ public class SetWarp implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.warp.admin.setwarp");
+		return source.hasPermission("core.admin.setwarp");
 	}
 
 }

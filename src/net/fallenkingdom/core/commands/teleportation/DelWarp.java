@@ -84,7 +84,7 @@ public class DelWarp implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.warp.admin.delwarp");
+		return source.hasPermission("core.admin.delwarp");
 	}
 
 }

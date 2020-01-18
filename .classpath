@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/8qBIT/eclipse-workspace/jars/guava-20.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/8qBIT/eclipse-workspace/jars/spongevanilla-1.12.2-7.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/8qBIT/eclipse-workspace/jars/LuckPerms-Sponge-5.0.39.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

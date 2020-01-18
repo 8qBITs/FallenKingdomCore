@@ -19,11 +19,11 @@ import org.spongepowered.api.world.World;
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 
-public class Heal implements CommandCallable {
+public class Feed implements CommandCallable {
 
-	private final Optional<Text> desc = Optional.of(Text.of("Heals player."));
-    private final Optional<Text> help = Optional.of(Text.of("Heals player."));
-    private final Text usage = Text.of("/heal [player]");
+	private final Optional<Text> desc = Optional.of(Text.of("Feeds player."));
+    private final Optional<Text> help = Optional.of(Text.of("Feeds"));
+    private final Text usage = Text.of("/feed [player]");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -43,15 +43,15 @@ public class Heal implements CommandCallable {
 		
 		String[] args = arguments.trim().split(" ");
 		if(args.length==0 || args[0].equals("")) {
-			p.offer(Keys.HEALTH, 20D);
-			msg.sendSubTitle("&6Healed");
+			p.offer(Keys.FOOD_LEVEL, 20);
+			msg.sendSubTitle("&6Fed");
 		} else {
 			Optional<Player> t = null;
 			if((t = Sponge.getServer().getPlayer(args[0])).isPresent()) {
-				t.get().offer(Keys.HEALTH, 20D);
-				msg.sendSubTitle("&6Healed player");
+				t.get().offer(Keys.FOOD_LEVEL, 20);
+				msg.sendSubTitle("&6Fed player");
 			} else {
-				msg.sendSubTitle("&cPlayer not found");
+				msg.sendSubTitle("&cPlayer not found");				
 			}
 		}
 
@@ -88,7 +88,7 @@ public class Heal implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.admin.heal");
+		return source.hasPermission("core.admin.feed");
 	}
 
 }

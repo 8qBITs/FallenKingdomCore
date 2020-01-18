@@ -19,7 +19,7 @@ import net.fallenkingdom.core.commands.*;
 import net.fallenkingdom.core.commands.home.*;
 import net.fallenkingdom.core.commands.kit.*;
 import net.fallenkingdom.core.commands.teleportation.*;
-import net.fallenkingdom.core.events.VanishEvents;
+import net.fallenkingdom.core.events.*;
 import net.fallenkingdom.core.util.AutoRestart;
 import net.fallenkingdom.core.util.TPA;
 import net.fallenkingdom.core.util.TPAManager;
@@ -106,11 +106,16 @@ public class Main {
     	cmdService.register(me, new Vanish(), "vanish", "v");
     	cmdService.register(me, new Kit(), "kit");
     	cmdService.register(me, new CreateKit(), "createkit");
+    	cmdService.register(me, new KickAll(), "kickall");
+    	cmdService.register(me, new Heal(), "heal");
+    	cmdService.register(me, new Feed(), "feed");
+    	cmdService.register(me, new Spawn(), "spawn");
     }
     
     private void registerEvents() {
     	EventManager evtService = Sponge.getEventManager();
-    	evtService.registerListeners(me, new VanishEvents());
+    	evtService.registerListeners(me, new PlayerJoin());
+    	//evtService.registerListeners(me, new VanishEvents());
     }
     
     public static Main getMain() {

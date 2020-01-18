@@ -80,7 +80,7 @@ public class Back implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.admin.back");
+		return source.hasPermission("core.back");
 	}
 
 }

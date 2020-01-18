@@ -1,4 +1,3 @@
-core.admin.back
 core.admin.feed
 core.admin.heal
 core.admin.flight
@@ -20,6 +19,7 @@ core.kit.use
 core.kit.<kitname>
 
 core.rtp
+core.back
 core.spawn
 core.chatcolor
 core.tpa

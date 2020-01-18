@@ -1,29 +1,33 @@
-package net.fallenkingdom.core.commands;
+package net.fallenkingdom.core.commands.kit;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.data.manipulator.mutable.entity.HealthData;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.Slot;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
+import com.google.common.reflect.TypeToken;
+
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
+import net.fallenkingdom.core.util.config.KitStorage;
 
-public class Heal implements CommandCallable {
+public class CreateKit implements CommandCallable {
 
-	private final Optional<Text> desc = Optional.of(Text.of("Heals player."));
-    private final Optional<Text> help = Optional.of(Text.of("Heals player."));
-    private final Text usage = Text.of("/heal [player]");
+	private final Optional<Text> desc = Optional.of(Text.of("Creates kit."));
+    private final Optional<Text> help = Optional.of(Text.of("Creates kit."));
+    private final Text usage = Text.of("/createkit <name> [delay] [permission]");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -41,22 +45,27 @@ public class Heal implements CommandCallable {
 			return u.success;
 		}
 		
-		String[] args = arguments.trim().split(" ");
-		if(args.length==0 || args[0].equals("")) {
-			p.offer(Keys.HEALTH, 20D);
-			msg.sendSubTitle("&6Healed");
-		} else {
-			Optional<Player> t = null;
-			if((t = Sponge.getServer().getPlayer(args[0])).isPresent()) {
-				t.get().offer(Keys.HEALTH, 20D);
-				msg.sendSubTitle("&6Healed player");
-			} else {
-				msg.sendSubTitle("&cPlayer not found");
-			}
-		}
-
+		String[] args = arguments.split(" ");
 		
-		// do shit here
+		List<ItemStack> kit = new ArrayList<ItemStack>();
+		
+		if(args.length!=0) {
+			p.getInventory().slots().forEach(slot -> {
+				if(slot.peek().isPresent()) {
+					kit.add(slot.peek().get());
+				}
+			});
+		}
+		
+		if(args.length==0 || args[0].contentEquals("")) {			
+			new Messenger(p).sendSubTitle("&cInvalid arguments");
+		} else if(args.length==1) {
+			KitStorage.saveKit(args[0].toLowerCase(), kit);
+		} else if(args.length==2) {
+			KitStorage.saveKit(args[0].toLowerCase(), kit, Utils.parseTimeFromString(args[1]));
+		} else {
+			KitStorage.saveKit(args[0].toLowerCase(), kit, Utils.parseTimeFromString(args[1]), true);
+		}
 		
         return u.success;
     }
@@ -88,7 +97,7 @@ public class Heal implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.admin.heal");
+		return source.hasPermission("core.admin.createkit");
 	}
 
 }

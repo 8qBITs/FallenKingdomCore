@@ -1,29 +1,28 @@
-package net.fallenkingdom.core.commands;
+package net.fallenkingdom.core.commands.kit;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.data.manipulator.mutable.entity.HealthData;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
+import net.fallenkingdom.core.util.config.KitStorage;
 
-public class Heal implements CommandCallable {
+public class Kit implements CommandCallable {
 
-	private final Optional<Text> desc = Optional.of(Text.of("Heals player."));
-    private final Optional<Text> help = Optional.of(Text.of("Heals player."));
-    private final Text usage = Text.of("/heal [player]");
+	private final Optional<Text> desc = Optional.of(Text.of("Redeems kit."));
+    private final Optional<Text> help = Optional.of(Text.of("Redeems kit."));
+    private final Text usage = Text.of("/kit <name>");
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -41,22 +40,21 @@ public class Heal implements CommandCallable {
 			return u.success;
 		}
 		
-		String[] args = arguments.trim().split(" ");
-		if(args.length==0 || args[0].equals("")) {
-			p.offer(Keys.HEALTH, 20D);
-			msg.sendSubTitle("&6Healed");
+		String[] args = arguments.split(" ");
+		
+		if(args.length==0) {			
+			new Messenger(p).sendSubTitle("&cPlease provide a kit name");
 		} else {
-			Optional<Player> t = null;
-			if((t = Sponge.getServer().getPlayer(args[0])).isPresent()) {
-				t.get().offer(Keys.HEALTH, 20D);
-				msg.sendSubTitle("&6Healed player");
-			} else {
-				msg.sendSubTitle("&cPlayer not found");
+			KitStorage.Kit kit;
+			if((kit = KitStorage.getKit(args[0].toLowerCase()))!=null)
+				if(kit.perm && !p.hasPermission("core.kit."+args[0].toLowerCase()))
+					p.sendMessage(Messenger.iCanHasColor("&8[&cCORE&8] &fYou don't have permission to redeem this kit"));
+				else
+					kit.Collect(p);
+			else {
+				new Messenger(p).sendSubTitle("&cThis kit doesn't exist");
 			}
 		}
-
-		
-		// do shit here
 		
         return u.success;
     }
@@ -88,7 +86,7 @@ public class Heal implements CommandCallable {
 	@Override
 	public boolean testPermission(CommandSource source) {
 		// TODO Auto-generated method stub
-		return source.hasPermission("core.admin.heal");
+		return source.hasPermission("core.kit.use");
 	}
 
 }

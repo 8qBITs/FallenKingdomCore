@@ -1,27 +1,25 @@
 package net.fallenkingdom.core.commands;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
-import org.spongepowered.api.Sponge;
-import org.spongepowered.api.command.CommandCallable;
-import org.spongepowered.api.command.CommandException;
-import org.spongepowered.api.command.CommandResult;
-import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.World;
-
+import com.flowpowered.math.vector.Vector3d;
 import com.google.common.reflect.TypeToken;
-
 import net.fallenkingdom.core.Main;
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 import net.fallenkingdom.core.util.config.MainConfig;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.CommandCallable;
+import org.spongepowered.api.command.CommandException;
+import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 public class Spawn implements CommandCallable {
 
@@ -48,9 +46,14 @@ public class Spawn implements CommandCallable {
 		String[] args = arguments.trim().split(" ");
 		if(args.length==0 || args[0].equals("")) {
 			Location<World> spawn;
+			Vector3d spawn_rot, spawn_head_rot;
 			try {
 				if((spawn = MainConfig.getConfig().getNode("spawn").getValue(TypeToken.of(Location.class))) != null) {
 					p.setLocation(spawn);
+					if((spawn_rot = MainConfig.getConfig().getNode("spawn_rot").getValue(TypeToken.of(Vector3d.class)))!=null)
+						p.setRotation(spawn_rot);
+					if((spawn_head_rot = MainConfig.getConfig().getNode("spawn_head_rot").getValue(TypeToken.of(Vector3d.class)))!=null)
+						p.setHeadRotation(spawn_head_rot);
 				} else {
 					msg.sendSubTitle("&cSpawn not found");
 				}
@@ -63,6 +66,8 @@ public class Spawn implements CommandCallable {
 				if(args[0].equalsIgnoreCase("set")) {
 					try {
 						MainConfig.getConfig().getNode("spawn").setValue(TypeToken.of(Location.class), p.getLocation());
+						MainConfig.getConfig().getNode("spawn_rot").setValue(TypeToken.of(Vector3d.class), p.getRotation());
+						MainConfig.getConfig().getNode("spawn_head_rot").setValue(TypeToken.of(Vector3d.class), p.getHeadRotation());
 						MainConfig.save();
 					} catch (ObjectMappingException e) {
 						Main.getMain().getLogger().info("Error setting spawn");

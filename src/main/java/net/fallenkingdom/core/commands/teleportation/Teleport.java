@@ -46,10 +46,6 @@ public class Teleport implements CommandCallable {
 			msg.sendSubTitle("&cPlease provide a player name");
 		} else {
 			Optional<Player> target = Sponge.getServer().getPlayer(args[0]);
-			System.out.println(target!=null);
-			System.out.println(target.isPresent());
-			System.out.println(target.get().getName());
-			System.out.println(target.get());
 			if(target!=null && target.isPresent()) {
 				TPAManager.RequestTpa(p, target.get());
 			} else {

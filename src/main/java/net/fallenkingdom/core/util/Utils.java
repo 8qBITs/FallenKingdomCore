@@ -23,7 +23,7 @@ public class Utils {
 		this.p = p;
 	}
 	
-	public CommandResult success = CommandResult.success();
+	public static CommandResult success = CommandResult.success();
 	
 	CommentedConfigurationNode backConfig = BackStorage.getConfig();
 	 

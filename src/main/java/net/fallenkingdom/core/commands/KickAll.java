@@ -25,15 +25,14 @@ public class KickAll implements CommandCallable {
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
-		
+		if(!(source instanceof Player)) {
+			return Utils.success;
+		}
+
 		Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
-		
-		if(!(source instanceof Player)) {
-			return u.success;
-		}
-		
+
 		if(!(testPermission(source))) {
 			msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
 			return u.success;
@@ -44,9 +43,7 @@ public class KickAll implements CommandCallable {
 				pl.kick(arguments.trim().equalsIgnoreCase("") ? Text.of("Kicked") : Text.of(arguments));
 			}
 		}
-		
-		// do shit here
-		
+
         return u.success;
     }
     

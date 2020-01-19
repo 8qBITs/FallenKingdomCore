@@ -25,14 +25,13 @@ public class TestCommand implements CommandCallable {
 	
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
-		
+		if(!(source instanceof Player)) {
+			return Utils.success;
+		}
+
 		Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
-		
-		if(!(source instanceof Player)) {
-			return u.success;
-		}
 
 		String[] args = arguments.split(" ");
 

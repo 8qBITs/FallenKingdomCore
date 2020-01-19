@@ -42,6 +42,7 @@ public class Main {
 	static Main me;
 	public boolean restart = false;
 	public int restart_timer = 600;
+	public ArrayList<String> commands = new ArrayList<>();
 	
 	@Inject
     private Logger logger;
@@ -95,6 +96,7 @@ public class Main {
         logger.info("The Core Is now fully loaded.");
 		Announcer();
 		AutoRestart ar = new AutoRestart(true);
+		//addHelpEntry();
     }
     
     private void registerCommands() {
@@ -123,6 +125,7 @@ public class Main {
     	cmdService.register(me, new Heal(), "heal");
     	cmdService.register(me, new Feed(), "feed");
     	cmdService.register(me, new Spawn(), "spawn");
+		//cmdService.register(me, new Help(), "help");
     }
     
     private void registerEvents() {
@@ -150,6 +153,14 @@ public class Main {
 
 			Sponge.getServer().getBroadcastChannel().send(Messenger.iCanHasColor("\n" + MainConfig.getConfig().getNode("announcment").getString() + "\n"));
 		}).async().interval(10, TimeUnit.MINUTES).submit(this);
+	}
+
+	@Deprecated
+	private void addHelpEntry() {
+		String[] cmds = new String[] {"sethome <name>", "delhome <name>","home <name>", "back", "tpa <player>", "tpaccept", "tpdeny", "rtp", "spawn", "kit <name>"};
+		for (String cmd : cmds) {
+			commands.add(cmd);
+		}
 	}
     
     public static Main getMain() {

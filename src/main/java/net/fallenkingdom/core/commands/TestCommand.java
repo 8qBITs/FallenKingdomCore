@@ -39,7 +39,6 @@ public class TestCommand implements CommandCallable {
 		
 		// shti to test
 		AutoRestart ar = new AutoRestart(false);
-		ar.StartRestartTimer();
 		
 		p.sendMessage(Text.of("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
 		

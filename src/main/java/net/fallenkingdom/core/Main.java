@@ -3,7 +3,10 @@ package net.fallenkingdom.core;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
+import net.fallenkingdom.core.util.*;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
@@ -13,6 +16,7 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.service.ProviderRegistration;
 
 import com.google.common.reflect.TypeToken;
@@ -23,10 +27,6 @@ import net.fallenkingdom.core.commands.home.*;
 import net.fallenkingdom.core.commands.kit.*;
 import net.fallenkingdom.core.commands.teleportation.*;
 import net.fallenkingdom.core.events.*;
-import net.fallenkingdom.core.util.AutoRestart;
-import net.fallenkingdom.core.util.TPA;
-import net.fallenkingdom.core.util.TPAManager;
-import net.fallenkingdom.core.util.VanishManager;
 import net.fallenkingdom.core.util.config.BackStorage;
 import net.fallenkingdom.core.util.config.HomeStorage;
 import net.fallenkingdom.core.util.config.KitStorage;
@@ -34,11 +34,14 @@ import net.fallenkingdom.core.util.config.MainConfig;
 import net.fallenkingdom.core.util.config.WarpStorage;
 import net.luckperms.api.LuckPerms;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
+import org.spongepowered.api.world.Location;
 
-@Plugin(id = "fallenkingdomcore", name = "FallenKingdomCore", version = "1.0", authors = "8qBIT, Elipse458")
+@Plugin(id = "fallenkingdomcore", name = "FallenKingdomCore", version = "1.5", authors = "8qBIT, Elipse458")
 public class Main {
 	
 	static Main me;
+	public boolean restart = false;
+	public int restart_timer = 600;
 	
 	@Inject
     private Logger logger;
@@ -90,6 +93,8 @@ public class Main {
     public void onServerStart(GameStartedServerEvent event) {
     	
         logger.info("The Core Is now fully loaded.");
+		Announcer();
+		AutoRestart ar = new AutoRestart(true);
     }
     
     private void registerCommands() {
@@ -126,6 +131,26 @@ public class Main {
     	evtService.registerListeners(me, new Chat());
     	//evtService.registerListeners(me, new VanishEvents());
     }
+
+    private void Announcer() {
+		Task task = Task.builder().execute(() -> {
+
+			try{
+				MainConfig.getConfig().getNode("announcment").getString().equals(null);
+			} catch(NullPointerException e) {
+				try {
+					MainConfig.getConfig().getNode("announcment").setValue(TypeToken.of(String.class),
+							"&eThank you for playing on &6&lF&e&lallen &6&lK&e&lingdom&e, make sure to join our discord server: &fhttps://discord.gg/zhrW4zC");
+				} catch (ObjectMappingException ex) {
+					getLogger().error("Unable to set default announcment!");
+					return;
+				}
+				MainConfig.save();
+			}
+
+			Sponge.getServer().getBroadcastChannel().send(Messenger.iCanHasColor("\n" + MainConfig.getConfig().getNode("announcment").getString() + "\n"));
+		}).async().interval(10, TimeUnit.MINUTES).submit(this);
+	}
     
     public static Main getMain() {
 		return me;

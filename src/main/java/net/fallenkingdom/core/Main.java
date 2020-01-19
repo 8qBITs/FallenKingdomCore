@@ -128,6 +128,7 @@ public class Main {
     	cmdService.register(me, new Spawn(), "spawn");
 		cmdService.register(me, new Discord(), "discord");
 		cmdService.register(me, new Trash(), "trash", "trash_can");
+		cmdService.register(me, new Restart(), "restart", "reboot");
 		//cmdService.register(me, new Help(), "help");
     }
     

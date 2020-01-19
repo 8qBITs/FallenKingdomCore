@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00cc8e67-e092-4925-ba9b-7196ce023c70" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/events/PlayerDeath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/util/Statistics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/Restart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/util/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/util/Statistics.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +60,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -129,6 +130,14 @@
       <option name="presentableId" value="Default" />
       <updated>1579385945700</updated>
     </task>
+    <task id="LOCAL-00001" summary="Implemented stats">
+      <created>1579459797215</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1579459797215</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,13 +145,27 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implemented stats" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented stats" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="777" y="475" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog" timestamp="1579462034649">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="777" y="475" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579462034649" />
+    <state x="529" y="155" key="CommitChangelistDialog2" timestamp="1579459796881">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="529" y="155" key="CommitChangelistDialog2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579459796881" />
     <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1579446683757">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
@@ -163,5 +186,9 @@
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
     <state x="540" y="296" key="IDE.errors.dialog/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579386670721" />
+    <state x="769" y="478" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579459849682">
+      <screen x="0" y="40" width="1920" height="1040" />
+    </state>
+    <state x="769" y="478" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579459849682" />
   </component>
 </project>

@@ -5,13 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import net.fallenkingdom.core.util.AutoRestart;
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.data.manipulator.mutable.entity.HealthData;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -22,7 +23,7 @@ public class TestCommand implements CommandCallable {
 	private final Optional<Text> desc = Optional.of(Text.of("test."));
     private final Optional<Text> help = Optional.of(Text.of("twest"));
     private final Text usage = Text.of("/test");
-	
+
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
 		if(!(source instanceof Player)) {
@@ -35,15 +36,13 @@ public class TestCommand implements CommandCallable {
 
 		String[] args = arguments.split(" ");
 
-		
+
 		// shti to test
-		AutoRestart ar = new AutoRestart(false);
-		
+
 		p.sendMessage(Text.of("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-		
         return u.success;
     }
-    
+
 	@Override
 	public Optional<Text> getHelp(CommandSource source) {
 		// TODO Auto-generated method stub

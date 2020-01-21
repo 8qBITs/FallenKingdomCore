@@ -1,10 +1,12 @@
 package net.fallenkingdom.core.commands;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import net.fallenkingdom.core.util.AutoRestart;
+import net.fallenkingdom.core.Main;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -14,14 +16,15 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
+import net.fallenkingdom.core.util.AutoRestart;
 import net.fallenkingdom.core.util.Messenger;
 import net.fallenkingdom.core.util.Utils;
 
-public class Restart implements CommandCallable {
+public class TicksPerSecond implements CommandCallable {
 
-    private final Optional<Text> desc = Optional.of(Text.of("Restarts the server."));
-    private final Optional<Text> help = Optional.of(Text.of("Restarts the server without automatic scheduler."));
-    private final Text usage = Text.of("/restart");
+    private final Optional<Text> desc = Optional.of(Text.of("Get current and average TPS over 1 minute."));
+    private final Optional<Text> help = Optional.of(Text.of("Get TPS display."));
+    private final Text usage = Text.of("/tps");
 
     @Override
     public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -33,14 +36,32 @@ public class Restart implements CommandCallable {
         Utils u = new Utils(p);
         Messenger msg = new Messenger(p);
 
-        if(!(testPermission(source))) {
-            msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
-            return u.success;
+        String[] args = arguments.split(" ");
+
+        double avgTicks = calculateAverage(Main.getMain().tpsCollection);
+
+        p.sendMessage(msg.iCanHasColor("\n &6&lF&e&lallen &6&lK&e&lingdom &f-> &a&lTicks per second monitor.\n" +
+                " &8- &eAverage last minute&f: &a" + calculateAverage(Main.getMain().tpsCollection) + "\n" +
+                " &8- &eCurrent&f: &a" + Sponge.getServer().getTicksPerSecond() + "\n"));
+
+        if(avgTicks > 15.00 && p.getConnection().getLatency() > 100) {
+            p.sendMessage(msg.iCanHasColor("&eIs this server lagging? &a&lNo.\n &a&lSolution&f -> &cYour ping is above 100 please check your internet connection."));
+        } else {
+            p.sendMessage(msg.iCanHasColor("&eIs this server lagging? &c&lPossibly."));
         }
 
-        AutoRestart ar = new AutoRestart(true, true);
-        msg.sendAction("&aSuccess&e, AutoRestart sequence has been initiated.");
         return u.success;
+    }
+
+    private double calculateAverage(ArrayList<Integer> marks) {
+        Integer sum = 0;
+        if(!marks.isEmpty()) {
+            for (Integer mark : marks) {
+                sum += mark;
+            }
+            return sum.doubleValue() / marks.size();
+        }
+        return sum;
     }
 
     @Override
@@ -70,7 +91,7 @@ public class Restart implements CommandCallable {
     @Override
     public boolean testPermission(CommandSource source) {
         // TODO Auto-generated method stub
-        return source.hasPermission("core.admin.heal");
+        return source.hasPermission("core.tps");
     }
 
 }

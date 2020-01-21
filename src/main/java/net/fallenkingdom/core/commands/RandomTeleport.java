@@ -23,24 +23,25 @@ public class RandomTeleport implements CommandCallable {
 	private final Optional<Text> desc = Optional.of(Text.of("Teleports layer to random location."));
     private final Optional<Text> help = Optional.of(Text.of("Get teleports anywhere in between 0 - 5000 +- x,z"));
     private final Text usage = Text.of("/rtp");
-	
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public CommandResult process(CommandSource source, String arguments) throws CommandException {
-		if(!(source instanceof Player)) {
-			return Utils.success;
-		}
 
     	Player p = (Player) source;
 		Utils u = new Utils(p);
 		Messenger msg = new Messenger(p);
 		Random rand = new Random();
-		
+
+		if(!(source instanceof Player)) {
+			return u.success;
+		}
+
 		if(!(testPermission(source))) {
 			msg.sendFullTitle("&cUh oh what now?", "&eYou don't have permission to use this!");
 			return u.success;
 		}
-		
+
 		int x = rand.nextInt(5000);
 		int z = rand.nextInt(5000);
 		int y = 0;
@@ -53,7 +54,7 @@ public class RandomTeleport implements CommandCallable {
 		}
 
 		Location loc = new Location(p.getWorld(), x, y, z);
-		
+
 		u.setBackLocation(p.getLocation());
 		p.setLocation(loc);
 		msg.sendAction(String.format("&eTeleporting to: &f%d %d %d", x,y,z));

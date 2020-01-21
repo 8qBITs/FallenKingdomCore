@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import jdk.internal.jline.internal.Nullable;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.text.Text;
@@ -16,14 +17,27 @@ import net.fallenkingdom.core.Main;
 
 public class AutoRestart {
 
-	public AutoRestart(Boolean run) {
+	/**
+	 * Start the AutoRestart thread
+	 * @param run
+	 * Forcefully start AutoRestart sequence even if no conditions are met.
+	 * @param force
+	 *
+	 */
+	public AutoRestart(Boolean run, @Nullable Boolean force) {
 		if(run) {
-			if(!Main.getMain().restart) {
-				Task task = Task.builder().execute(new TimeChecker())
-						.async()
-						.interval(30, TimeUnit.SECONDS)
+			if(force != null && force) {
+				Task task2 = Task.builder().execute(new Restarter())
+						.interval(1, TimeUnit.SECONDS)
 						.submit(Main.getMain());
-				Main.getMain().restart = true;
+			} else {
+				if(!Main.getMain().restart) {
+					Task task = Task.builder().execute(new TimeChecker())
+							.async()
+							.interval(30, TimeUnit.SECONDS)
+							.submit(Main.getMain());
+					Main.getMain().restart = true;
+				}
 			}
 		}
 	}
@@ -53,7 +67,7 @@ public class AutoRestart {
 		}
     }
 
-	private class Restarter implements Consumer<Task> {
+	protected class Restarter implements Consumer<Task> {
 		@Override
 		public void accept(Task task) {
 
@@ -63,6 +77,7 @@ public class AutoRestart {
 				if(Main.getMain().restart_timer == 0) {
 					Task.builder()
 							.execute(() -> {
+								Sponge.getCommandManager().process(Sponge.getServer().getConsole(), "save-all");
 								Sponge.getServer().shutdown(iCanHasColor("&eServer is restarting."));
 								Main.getMain().getLogger().error("Achievement Unlocked: How did we get here?");
 							})

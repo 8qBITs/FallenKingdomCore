@@ -44,6 +44,7 @@ public class Main {
 	public boolean restart = false;
 	public int restart_timer = 600;
 	public ArrayList<String> commands = new ArrayList<>();
+	public ArrayList<Integer> tpsCollection = new ArrayList<Integer>();
 	
 	@Inject
     private Logger logger;
@@ -96,7 +97,8 @@ public class Main {
     	
         logger.info("The Core Is now fully loaded.");
 		Announcer();
-		AutoRestart ar = new AutoRestart(true);
+		AutoRestart ar = new AutoRestart(true, false);
+		TickCollection();
 		//addHelpEntry();
     }
     
@@ -129,6 +131,7 @@ public class Main {
 		cmdService.register(me, new Discord(), "discord");
 		cmdService.register(me, new Trash(), "trash", "trash_can");
 		cmdService.register(me, new Restart(), "restart", "reboot");
+		cmdService.register(me, new TicksPerSecond(), "tps", "lag", "lagmonitor");
 		//cmdService.register(me, new Help(), "help");
     }
     
@@ -157,6 +160,20 @@ public class Main {
 
 			Sponge.getServer().getBroadcastChannel().send(Messenger.iCanHasColor("\n" + MainConfig.getConfig().getNode("announcment").getString() + "\n"));
 		}).async().interval(10, TimeUnit.MINUTES).submit(this);
+	}
+
+	private void TickCollection() {
+
+		// Collect server tick every 10 secs.
+
+		Task task = Task.builder().execute(() -> {
+			if(tpsCollection.size() > 5) {
+				tpsCollection.add((int) Sponge.getServer().getTicksPerSecond());
+				tpsCollection.remove(6);
+			} else {
+				tpsCollection.add((int) Sponge.getServer().getTicksPerSecond());
+			}
+		}).async().interval(10, TimeUnit.SECONDS).submit(this);
 	}
 
 	@Deprecated

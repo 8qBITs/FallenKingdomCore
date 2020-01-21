@@ -44,10 +44,11 @@ public class TicksPerSecond implements CommandCallable {
                 " &8- &eAverage last minute&f: &a" + calculateAverage(Main.getMain().tpsCollection) + "\n" +
                 " &8- &eCurrent&f: &a" + Sponge.getServer().getTicksPerSecond() + "\n"));
 
-        if(avgTicks > 15.00 && p.getConnection().getLatency() > 100) {
-            p.sendMessage(msg.iCanHasColor("&eIs this server lagging? &a&lNo.\n &a&lSolution&f -> &cYour ping is above 100 please check your internet connection."));
+        if(avgTicks > 15.00) {
+            p.sendMessage(msg.iCanHasColor("&eIs this server lagging? &a&lNo.\n" +
+                    (p.getConnection().getLatency() > 100 ? "&cYour ping is above &l100 &cplease check your internet connection.\n" : "&aNo client connection issues found.\n")));
         } else {
-            p.sendMessage(msg.iCanHasColor("&eIs this server lagging? &c&lPossibly."));
+            p.sendMessage(msg.iCanHasColor("&eIs this server lagging? &c&lPossibly.\n"));
         }
 
         return u.success;

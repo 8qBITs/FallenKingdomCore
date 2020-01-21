@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00cc8e67-e092-4925-ba9b-7196ce023c70" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/TicksPerSecond.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -11,42 +10,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Back.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Back.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Feed.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Feed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Flight.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Flight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/GameMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/GameMode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Heal.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Heal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Help.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Help.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/KickAll.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/KickAll.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/RandomTeleport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/RandomTeleport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Spawn.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Spawn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Speed.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Speed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/TeleportPosition.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/TeleportPosition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/TestCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/TestCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Vanish.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/Vanish.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/home/DelHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/home/DelHome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/home/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/home/Home.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/home/SetHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/home/SetHome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/kit/CreateKit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/kit/CreateKit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/kit/Kit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/kit/Kit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/DelWarp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/DelWarp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/SetWarp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/SetWarp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/Teleport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/Teleport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/TeleportAccept.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/TeleportAccept.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/TeleportDeny.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/TeleportDeny.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/TeleportHere.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/TeleportHere.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/Warp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/commands/teleportation/Warp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/events/Chat.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/events/Chat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/AutoRestart$Restarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/AutoRestart$Restarter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/AutoRestart$TimeChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/AutoRestart$TimeChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/AutoRestart.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/AutoRestart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/net/fallenkingdom/core/util/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/RandomTeleport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/RandomTeleport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/Restart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/Restart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/TestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/TestCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/util/AutoRestart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/util/AutoRestart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/TicksPerSecond.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/TicksPerSecond.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579462706169</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Latency checks &amp; restart command.">
+      <created>1579617424046</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1579617424046</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,7 +195,8 @@
     <MESSAGE value="Implemented stats" />
     <MESSAGE value="Added restart command." />
     <MESSAGE value="Fixed console crashes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed console crashes" />
+    <MESSAGE value="Added Latency checks &amp; restart command." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Latency checks &amp; restart command." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="219" key="#Project_Structure" timestamp="1579462736929">
@@ -233,26 +207,26 @@
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
     <state x="777" y="475" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579462034649" />
-    <state x="529" y="155" key="CommitChangelistDialog2" timestamp="1579462705849">
+    <state x="529" y="155" key="CommitChangelistDialog2" timestamp="1579617423440">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state x="529" y="155" key="CommitChangelistDialog2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579462705849" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1579617081667">
+    <state x="529" y="155" key="CommitChangelistDialog2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579617423440" />
+    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1579618807332">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579617081667" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1579617081667">
+    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
+    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1579618807332">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.center/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579617081667" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1579617081667">
+    <state width="1877" height="284" key="GridCell.Tab.0.center/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
+    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1579618807332">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.left/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579617081667" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1579617081667">
+    <state width="1877" height="284" key="GridCell.Tab.0.left/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
+    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1579618807332">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.right/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579617081667" />
+    <state width="1877" height="284" key="GridCell.Tab.0.right/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
     <state x="540" y="296" key="IDE.errors.dialog" timestamp="1579386670721">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>

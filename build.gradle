@@ -8,7 +8,7 @@ compileJava.options.encoding = 'UTF-8'
 
 // TODO: Change the following to match your information
 group = 'net.fallenkingdom.core'
-version = '1.5.0-SNAPSHOT'
+version = '1.6.2-SNAPSHOT'
 description = 'The Core plugin for Fallen Network'
 
 repositories {

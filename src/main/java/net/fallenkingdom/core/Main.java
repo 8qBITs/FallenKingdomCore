@@ -37,7 +37,7 @@ import net.luckperms.api.LuckPerms;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 import org.spongepowered.api.world.Location;
 
-@Plugin(id = "fallenkingdomcore", name = "FallenKingdomCore", version = "1.5", authors = "8qBIT, Elipse458")
+@Plugin(id = "fallenkingdomcore", name = "FallenKingdomCore", version = "1.6.2", authors = "8qBIT, Elipse458")
 public class Main {
 	
 	static Main me;

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00cc8e67-e092-4925-ba9b-7196ce023c70" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/util/AutoRestart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/util/AutoRestart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579622736607</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Updated gitignore">
+      <created>1579623389673</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1579623389673</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -238,7 +245,8 @@
     <MESSAGE value="Added TabList" />
     <MESSAGE value="Removed Statistics.java" />
     <MESSAGE value="Updated?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated?" />
+    <MESSAGE value="Updated gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated gitignore" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="219" key="#Project_Structure" timestamp="1579462736929">
@@ -249,10 +257,10 @@
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
     <state x="777" y="475" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579462034649" />
-    <state x="529" y="155" key="CommitChangelistDialog2" timestamp="1579622736083">
+    <state x="529" y="155" key="CommitChangelistDialog2" timestamp="1579623389424">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state x="529" y="155" key="CommitChangelistDialog2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579622736083" />
+    <state x="529" y="155" key="CommitChangelistDialog2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579623389424" />
     <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1579622500134">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>

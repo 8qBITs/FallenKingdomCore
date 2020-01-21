@@ -10,8 +10,6 @@ import java.util.function.Consumer;
 import jdk.internal.jline.internal.Nullable;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.scheduler.Task;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.serializer.TextSerializers;
 
 import net.fallenkingdom.core.Main;
 
@@ -41,10 +39,7 @@ public class AutoRestart {
 			}
 		}
 	}
-	
-	private Text iCanHasColor(String input) {
-		return Text.of(TextSerializers.FORMATTING_CODE.deserialize(input));
-	}
+
 	private boolean started = false;
 
     private class TimeChecker implements Consumer<Task> {
@@ -63,7 +58,6 @@ public class AutoRestart {
 					started = true;
 				}
 			}
-
 		}
     }
 
@@ -78,7 +72,7 @@ public class AutoRestart {
 					Task.builder()
 							.execute(() -> {
 								Sponge.getCommandManager().process(Sponge.getServer().getConsole(), "save-all");
-								Sponge.getServer().shutdown(iCanHasColor("&eServer is restarting."));
+								Sponge.getServer().shutdown(Messenger.iCanHasColor("&eServer is restarting."));
 								Main.getMain().getLogger().error("Achievement Unlocked: How did we get here?");
 							})
 							.submit(Main.getMain());
@@ -86,13 +80,12 @@ public class AutoRestart {
 				}
 				sendAnnouncment(Main.getMain().restart_timer);
 			}
-
 			Main.getMain().restart_timer--;
 		}
 
 		private void sendAnnouncment(int timer) {
 			int minutes = (int)Math.floor(timer/60), seconds = timer%60;
-			Sponge.getServer().getBroadcastChannel().send(iCanHasColor(String.format("\n &4&lWARNING! &ethis server is scheduled to restart in %d minutes %d seconds!\n", minutes, seconds)));
+			Sponge.getServer().getBroadcastChannel().send(Messenger.iCanHasColor(String.format("\n &4&lWARNING! &ethis server is scheduled to restart in %d minutes %d seconds!\n", minutes, seconds)));
 		}
 
 	}

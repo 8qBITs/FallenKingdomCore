@@ -25,9 +25,9 @@ import java.util.Optional;
 
 public class Trash implements CommandCallable {
 
-    private final Optional<Text> desc = Optional.of(Text.of("Shows discord invite."));
-    private final Optional<Text> help = Optional.of(Text.of("Shows discord invite."));
-    private final Text usage = Text.of("/heal [player]");
+    private final Optional<Text> desc = Optional.of(Text.of("Opens trash chest."));
+    private final Optional<Text> help = Optional.of(Text.of("Opens a trash chest where you can dispose of any items."));
+    private final Text usage = Text.of("/trash");
 
     @Override
     public CommandResult process(CommandSource source, String arguments) throws CommandException {
@@ -77,7 +77,7 @@ public class Trash implements CommandCallable {
     @Override
     public boolean testPermission(CommandSource source) {
         // TODO Auto-generated method stub
-        return source.hasPermission("core.discord");
+        return source.hasPermission("core.trash");
     }
 
 }

@@ -2,7 +2,7 @@
     {
         "modid": "fallenkingdomcore",
         "name": "FallenKingdomCore",
-        "version": "1.5.0-SNAPSHOT",
+        "version": "1.6.2-SNAPSHOT",
         "description": "The Core plugin for Fallen Network"
     }
 ]

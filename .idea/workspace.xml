@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="00cc8e67-e092-4925-ba9b-7196ce023c70" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="00cc8e67-e092-4925-ba9b-7196ce023c70" name="Default Changelist" comment="Version update, Updated TPS checks.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/TicksPerSecond.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/TicksPerSecond.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/Restart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/fallenkingdom/core/commands/Restart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/permission_info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/permission_info.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579617424046</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Version update, Updated TPS checks.">
+      <created>1579618903895</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1579618903895</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,7 +195,8 @@
     <MESSAGE value="Added restart command." />
     <MESSAGE value="Fixed console crashes" />
     <MESSAGE value="Added Latency checks &amp; restart command." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Latency checks &amp; restart command." />
+    <MESSAGE value="Version update, Updated TPS checks." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version update, Updated TPS checks." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="219" key="#Project_Structure" timestamp="1579462736929">
@@ -207,26 +207,26 @@
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
     <state x="777" y="475" key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579462034649" />
-    <state x="529" y="155" key="CommitChangelistDialog2" timestamp="1579617423440">
+    <state x="529" y="155" key="CommitChangelistDialog2" timestamp="1579619085081">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state x="529" y="155" key="CommitChangelistDialog2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579617423440" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1579618807332">
+    <state x="529" y="155" key="CommitChangelistDialog2/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579619085081" />
+    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1579618960929">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1579618807332">
+    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618960929" />
+    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1579618960929">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.center/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1579618807332">
+    <state width="1877" height="284" key="GridCell.Tab.0.center/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618960929" />
+    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1579618960929">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.left/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1579618807332">
+    <state width="1877" height="284" key="GridCell.Tab.0.left/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618960929" />
+    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1579618960929">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.right/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618807332" />
+    <state width="1877" height="284" key="GridCell.Tab.0.right/0.40.1920.1040/1920.40.1920.1040@0.40.1920.1040" timestamp="1579618960929" />
     <state x="540" y="296" key="IDE.errors.dialog" timestamp="1579386670721">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>

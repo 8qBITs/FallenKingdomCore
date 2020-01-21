@@ -10,6 +10,7 @@ core.admin.vanish
 core.admin.createkit
 core.admin.delwarp
 core.admin.setwarp
+core.admin.restart
 
 core.home.sethome
 core.home.delhome
@@ -27,3 +28,4 @@ core.tpaccept
 core.tpdeny
 core.tpahere
 core.warp
+core.tps

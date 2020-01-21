@@ -70,7 +70,7 @@ public class Restart implements CommandCallable {
     @Override
     public boolean testPermission(CommandSource source) {
         // TODO Auto-generated method stub
-        return source.hasPermission("core.admin.heal");
+        return source.hasPermission("core.admin.restart");
     }
 
 }
